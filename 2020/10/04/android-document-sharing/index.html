@@ -1,0 +1,448 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><script>var _paq = window._paq = window._paq || [];
+_paq.push(['trackPageView']);
+_paq.push(['enableLinkTracking']);  
+var u="//matomo.analysis.msy.plus/";
+_paq.push(['setTrackerUrl', u+'matomo.php']);
+_paq.push(['setSiteId', '1']);
+var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);</script><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="theme-color" content="#54bcff"><link rel="manifest" href="/manifest.json?v=2.6.2"><link rel="icon" href="/uploads/pic-300x256.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/uploads/pic-512x512.jpg?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="在阅读Android 移动应用开发基础教程 微课版 第54页的启动另一个应用中的活动时,当时想到应该可以做出类似于各大平台的分享页面一样的功能，便搜集资料看到了这位大神给出的案例，具体代码在大神的仓库中,但是我使用的Android SDK以及Android studio的版本和大神的不一样，使用大神的代码出现了分享文件问题，认真解决发现了这里面还别有不少知识。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 文件分享">
+<meta property="og:url" content="https://msy.plus/2020/10/04/android-document-sharing/index.html">
+<meta property="og:site_name" content="墨抒颖">
+<meta property="og:description" content="在阅读Android 移动应用开发基础教程 微课版 第54页的启动另一个应用中的活动时,当时想到应该可以做出类似于各大平台的分享页面一样的功能，便搜集资料看到了这位大神给出的案例，具体代码在大神的仓库中,但是我使用的Android SDK以及Android studio的版本和大神的不一样，使用大神的代码出现了分享文件问题，认真解决发现了这里面还别有不少知识。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://msy.plus/uploads/android-document-sharing.png">
+<meta property="article:published_time" content="2020-10-03T20:49:25.000Z">
+<meta property="article:modified_time" content="2021-04-08T07:24:09.783Z">
+<meta property="article:author" content="墨抒颖">
+<meta property="article:tag" content="android">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://msy.plus/uploads/android-document-sharing.png"><title>Android 文件分享 | 墨抒颖</title><link ref="canonical" href="https://msy.plus/2020/10/04/android-document-sharing/"><link rel="alternate" href="/atom.xml" type="application/atom+xml"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: true,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: {"avoidBanner":true},
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/friendsAccounts/"><span class="header-nav-menu-item__icon"><i class="fas fa-torah"></i></span><span class="header-nav-menu-item__text">友链</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/discover/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">发现</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">墨抒颖</div><div class="header-banner-info__subtitle">大多数人都高估了他们一天能做的事情，但低估了他们一年能做的事情</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">Android 文件分享</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2020-10-03</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2021-04-08</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">722</span></span><span class="post-meta-item post-meta-item--visitors"><span class="post-meta-item__icon"><i class="fas fa-eye"></i></span><span class="post-meta-item__info">阅读次数</span><span class="post-meta-item__value" id="busuanzi_value_page_pv"></span></span></div></header><div class="post-body"><div class="gallery"><img src="/uploads/android-document-sharing.png"></div><p>在阅读<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://moshuying.top/2020/10/02/reading-book-android/" >Android 移动应用开发基础教程 微课版</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> 第54页的启动另一个应用中的活动时,当时想到应该可以做出类似于各大平台的分享页面一样的功能，便搜集资料看到了这位大神给出的<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.jianshu.com/p/9522e24713e1" >案例</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>，具体代码在大神的<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/gudd1991116/IntentShare" >仓库</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>中,但是我使用的Android SDK以及Android studio的版本和大神的不一样，使用大神的代码出现了分享文件问题，认真解决发现了这里面还别有不少知识。</p>
+<span id="more"></span>
+
+<p>具体原因是因为</p>
+<blockquote>
+<p>出现FileUriExposedException这样的异常，原因是Andorid7.0的“私有目录被限制访问”，“StrictMode API 政策”。由于从Android7.0开始，直接使用真实的路径的Uri会被认为是不安全的，会抛出一个FileUriExposedException这样的异常。需要使用FileProvider,选择性地将封装过的Uri共享到外部。</p>
+</blockquote>
+<p>大神已经前瞻性的把这一部分解决了，但是我的Android版本是10.0+相较于大神的版本还是太高了。以下是修改的地方。</p>
+<figure class="highlight xml"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">provider</span></span></span><br><span class="line"><span class="tag"><span class="attr">-</span>   <span class="attr">android:name</span>=<span class="string">&quot;android.support.v4.content.FileProvider&quot;</span></span></span><br><span class="line"><span class="tag">+   <span class="attr">android:name</span>=<span class="string">&quot;androidx.core.content.FileProvider&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:authorities</span>=<span class="string">&quot;你的包名.fileprovider&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:exported</span>=<span class="string">&quot;false&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:grantUriPermissions</span>=<span class="string">&quot;true&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--元数据--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta-data</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:name</span>=<span class="string">&quot;android.support.FILE_PROVIDER_PATHS&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:resource</span>=<span class="string">&quot;@xml/file_provider_paths&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">provider</span>&gt;</span></span><br></pre></td></tr></table></div></figure>
+
+<p>其中android:resource=”@xml/file_provider_paths”的内容你可以在res目录下新建一个xml文件夹，在文件夹中新建一个file_provider_paths.xml文件即可，如下图所示</p>
+<p><img src="data:image/jpeg;base64,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"></p>
+<p>file_provider_paths.xml的文件内容如下<br>注释掉的代码可能在更低版本的Android中使用，但如果你也是Android 10.0+ 直接去掉即可</p>
+<figure class="highlight xml"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">paths</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">external-path</span> <span class="attr">path</span>=<span class="string">&quot;&quot;</span> <span class="attr">name</span>=<span class="string">&quot;myFile&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">external-path</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--    &lt;root-path--&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--        name=&quot;ext_sd_files&quot;--&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--        path=&quot;&quot; /&gt;--&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--    &lt;files-path--&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--        name=&quot;int_files&quot;--&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--        path=&quot;.&quot; /&gt;--&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--    &lt;external-path--&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--        name=&quot;ext_files&quot;--&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--        path=&quot;&quot; /&gt;--&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--    &lt;cache-path--&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--        name=&quot;cache_files&quot;--&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--        path=&quot;&quot; /&gt;--&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--    &lt;external-files-path--&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--        name=&quot;ext_int_files&quot;--&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--        path=&quot;&quot; /&gt;--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">paths</span>&gt;</span></span><br></pre></td></tr></table></div></figure>
+<p>这里代码中你的 path=” “，是有特殊意义的，它代码根目录，也就是说你可以向其它的应用共享根目录及其子目录下任何一个文件了，如果你将path设为path=”pictures”， 那么它代表着根目录下的pictures目录(eg:/storage/emulated/0/pictures)，如果你向其它应用分享pictures目录范围之外的文件是不行的。</p>
+<p>参考文章<br><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://blog.csdn.net/kabuto_hui/article/details/78907572?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-4.add_param_isCf&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-4.add_param_isCf" >安卓学习笔记(15)-android文件分享在android7.0以上版本报错的解决方案</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span><br><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.jianshu.com/p/9522e24713e1" >Android系统分享使用Intent分享文本到QQ和文本+图片到微信朋友圈及纯图到微信</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://msy.plus">墨抒颖</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://msy.plus/2020/10/04/android-document-sharing/">https://msy.plus/2020/10/04/android-document-sharing/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://msy.plus/tags/android/">android</a></span></div><div class="post-share"><div class="social-share" data-sites="qzone, qq, weibo, wechat, douban, linkedin, facebook, twitter, google">Share to: </div></div><div class="post-reward reward"><div class="reward-button">请我喝杯咖啡~</div><div class="reward-qrcode"><span class="reward-qrcode-alipay"><img class="reward-qrcode-alipay__img" src="/uploads/alipay.jpg"><div class="reward-qrcode-alipay__text">支付宝打赏</div></span><span class="reward-qrcode-wechat"><img class="reward-qrcode-wechat__img" src="/uploads/wechat.png"><div class="reward-qrcode-wechat__text">微信打赏</div></span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2020/10/05/threejs-shader/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">threejs 中的shader效果</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2020/10/03/reading-book-android/"><span class="paginator-prev__text">Android 移动应用开发基础教程 微课版</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="disqus_thread"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/uploads/pic-512x512.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">你可以在这些地方找到我</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/moshuying/" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="http://sfau.lt/bPbzVVJ/" target="_blank" rel="noopener" data-popover="思否" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">sf</span></a><a class="sidebar-ov-social-item" href="https://home.cnblogs.com/u/moshuying/" target="_blank" rel="noopener" data-popover="social.bokeyuan" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">博客园</span></a><a class="sidebar-ov-social-item" href="https://juejin.im/user/2700056289356936/" target="_blank" rel="noopener" data-popover="social.juejin" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">掘金</span></a><a class="sidebar-ov-social-item" href="http://weibo.cn/ismoshuying" target="_blank" rel="noopener" data-popover="微博" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-weibo"></i></span></a><a class="sidebar-ov-social-item" href="https://www.zhihu.com/people/mo-shu-ying-54" target="_blank" rel="noopener" data-popover="知乎" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">知</span></a><a class="sidebar-ov-social-item" href="https://blog.csdn.net/qq_34846662" target="_blank" rel="noopener" data-popover="social.csdn" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">csdn</span></a></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-email"><a class="sidebar-ov-feed-email__link" href="http://eepurl.com/heNNvH" target="_blank" rel="noopener"><span class="sidebar-ov-feed-email__icon"><i class="fas fa-envelope"></i></span><span>Email 订阅</span></a></span><span class="sidebar-ov-feed-rss"><a class="sidebar-ov-feed-rss__link" href="/atom.xml" target="_blank" rel="noopener"><span class="sidebar-ov-feed-rss__icon"><i class="fas fa-rss"></i></span><span>RSS 订阅</span></a></span></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">30</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">14</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">30</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>墨抒颖</span><span class="footer__devider">|</span><span><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn" >蜀ICP备19031274号-1</a></span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.4.0</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div><div class="busuanzi"><span class="busuanzi-siteuv"><span class="busuanzi-siteuv__icon"><i class="fas fa-user"></i></span><span class="busuanzi-siteuv__info">访问人数</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_uv"></span></span><span class="busuanzi-sitepv"><span class="busuanzi-siteuv__icon"><i class="fas fa-eye"></i></span><span class="busuanzi-siteuv__info">浏览总量</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/ribbon.js@latest/dist/ribbon.min.js" size="300" alpha="0.6" zIndex="-1"></script><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.json';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章无标题 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);
+
+function safeOpenUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+
+function extSearch(engine) {
+  var engines = {
+    google: 'https://www.google.com/search?q=',
+    bing: 'https://cn.bing.com/search?q=',
+    baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+  };
+  var host = window.location.host;
+  var query = $('.search-input input').val().toLowerCase().trim();
+  var uri = engines[engine] + query + ' site:' + host;
+
+  if (query) {
+    safeOpenUrl(uri);
+  } else {
+    Stun.utils.popAlert('warning', '请输入字符');
+  }
+}
+
+var assistSearchList = window.CONFIG.assistSearch;
+
+if (Array.isArray(assistSearchList)) {
+  assistSearchList.forEach(function (name) {
+    document.querySelector('.search-btns-item--' + name).addEventListener('click', function () {
+      extSearch(name);
+    }, false);
+  });
+}</script><script src="https://cdn.jsdelivr.net/npm/pjax@latest/pjax.min.js"></script><script>window.addEventListener('DOMContentLoaded', function () {
+  var pjax = new Pjax({"selectors":["head title","#main",".pjax-reload"],"history":true,"scrollTo":false,"scrollRestoration":false,"cacheBust":false,"debug":false,"currentUrlFullReload":false,"timeout":0});
+  // 加载进度条的计时器
+  var loadingTimer = null;
+
+  // 重置页面 Y 方向上的滚动偏移量
+  document.addEventListener('pjax:send', function () {
+    $('.header-nav-menu').removeClass('show');
+    if (CONFIG.pjax && CONFIG.pjax.avoidBanner) {
+      $('html').velocity('scroll', {
+        duration: 500,
+        offset: $('#header').height(),
+        easing: 'easeInOutCubic'
+      });
+    }
+
+    var loadingBarWidth = 20;
+    var MAX_LOADING_WIDTH = 95;
+
+    $('.loading-bar').addClass('loading');
+    $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    clearInterval(loadingTimer);
+    loadingTimer = setInterval(function () {
+      loadingBarWidth += 3;
+      if (loadingBarWidth > MAX_LOADING_WIDTH) {
+        loadingBarWidth = MAX_LOADING_WIDTH;
+      }
+      $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    }, 500);
+  }, false);
+
+  window.addEventListener('pjax:complete', function () {
+    clearInterval(loadingTimer);
+    $('.loading-bar__progress').css('width', '100%');
+    $('.loading-bar').removeClass('loading');
+    setTimeout(function () {
+      $('.loading-bar__progress').css('width', '0');
+    }, 400);
+    $('link[rel=prefetch], script[data-pjax-rm]').each(function () {
+      $(this).remove();
+    });
+    $('script[data-pjax], #pjax-reload script').each(function () {
+      $(this).parent().append($(this).remove());
+    });
+
+    if (Stun.utils.pjaxReloadBoot) {
+      Stun.utils.pjaxReloadBoot();
+    }
+    if (Stun.utils.pjaxReloadScroll) {
+      Stun.utils.pjaxReloadScroll();
+    }
+    if (Stun.utils.pjaxReloadSidebar) {
+      Stun.utils.pjaxReloadSidebar();
+    }
+    if (false) {
+      if (Stun.utils.pjaxReloadHeader) {
+        Stun.utils.pjaxReloadHeader();
+      }
+      if (Stun.utils.pjaxReloadScrollIcon) {
+        Stun.utils.pjaxReloadScrollIcon();
+      }
+      if (Stun.utils.pjaxReloadLocalSearch) {
+        Stun.utils.pjaxReloadLocalSearch();
+      }
+    }
+  }, false);
+}, false);</script><div id="pjax-reload"><script src="https://cdn.jsdelivr.net/npm/quicklink@1.0.1/dist/quicklink.umd.js"></script><script>function initQuicklink() {
+  quicklink({
+    timeout: '10000',
+    priority: true,
+    ignores: [uri => uri.includes('#'), uri => uri === 'https://msy.plus/2020/10/04/android-document-sharing/', /\/api\/?/,uri => uri.includes('.xml'),uri => uri.includes('.zip'),(uri, el) => el.hasAttribute('nofollow'),(uri, el) => el.hasAttribute('noprefetch')]
+  });
+}
+
+if (true || false) {
+  initQuicklink();
+} else {
+  window.addEventListener('DOMContentLoaded', initQuicklink, false);
+}</script><script src="https://cdn.jsdelivr.net/gh/sukkaw/busuanzi@latest/bsz.pure.mini.js" async></script></div><script data-pjax="">function loadDisqus () {
+  if (!document.getElementById('disqus_thread')) {
+    return;
+  }
+  if (window.DISQUS) {
+    DISQUS.reset({
+      reload: true,
+      config: function () {
+        this.page.url = 'https://msy.plus/2020/10/04/android-document-sharing/';
+        this.page.identifier = '2020/10/04/android-document-sharing/';
+        this.page.title = 'Android 文件分享';
+      }
+    });
+  } else {
+    var d = document;
+    var sc = d.createElement('script');
+    var se = d.createElement('script');
+
+    if (true) {
+      sc.src = 'https://msy-plus.disqus.com/count.js';
+      sc.id = 'dsq-count-scr';
+      sc.async = true;
+      if (true) {
+        sc.setAttribute('data-pjax', '');
+      }
+      (d.head || d.body).appendChild(sc);
+    }
+    se.src = 'https://msy-plus.disqus.com/embed.js';
+    (d.head || d.body).appendChild(se);
+  }
+}
+
+if (true) {
+  loadDisqus();
+} else {
+  window.addEventListener('DOMContentLoaded', loadDisqus, false);
+}</script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script><script type="application/json" src="/search.json"></script></body></html>

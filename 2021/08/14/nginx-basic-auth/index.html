@@ -1,0 +1,548 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><script>var _paq = window._paq = window._paq || [];
+_paq.push(['trackPageView']);
+_paq.push(['enableLinkTracking']);  
+var u="//matomo.analysis.msy.plus/";
+_paq.push(['setTrackerUrl', u+'matomo.php']);
+_paq.push(['setSiteId', '1']);
+var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);</script><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="theme-color" content="#54bcff"><link rel="manifest" href="/manifest.json?v=2.6.2"><link rel="icon" href="/uploads/pic-300x256.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/uploads/pic-512x512.jpg?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="点击访问msy.plus获得更好的体验                     http基本验证的作用        http基本身份验证会从浏览器弹出登录窗口， 简单明了,容易理解， 对于面向终端用户的前台来说，不够友好， 但对于内部员工操作的后台还是很有用，通常作为一层安全措施应用。                      这个登录认证安全吗？       auth_basic作为一个认证模">
+<meta property="og:type" content="article">
+<meta property="og:title" content="带你深入了解nginx基本登录认证（包含配置步骤）">
+<meta property="og:url" content="https://msy.plus/2021/08/14/nginx-basic-auth/index.html">
+<meta property="og:site_name" content="墨抒颖">
+<meta property="og:description" content="点击访问msy.plus获得更好的体验                     http基本验证的作用        http基本身份验证会从浏览器弹出登录窗口， 简单明了,容易理解， 对于面向终端用户的前台来说，不够友好， 但对于内部员工操作的后台还是很有用，通常作为一层安全措施应用。                      这个登录认证安全吗？       auth_basic作为一个认证模">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://msy.plus/uploads/logo/nginx-logo.jpg">
+<meta property="article:published_time" content="2021-08-14T09:53:25.000Z">
+<meta property="article:modified_time" content="2021-08-14T01:59:59.640Z">
+<meta property="article:author" content="墨抒颖">
+<meta property="article:tag" content="运维">
+<meta property="article:tag" content="nginx">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://msy.plus/uploads/logo/nginx-logo.jpg"><title>带你深入了解nginx基本登录认证（包含配置步骤） | 墨抒颖</title><link ref="canonical" href="https://msy.plus/2021/08/14/nginx-basic-auth/"><link rel="alternate" href="/atom.xml" type="application/atom+xml"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: true,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: {"avoidBanner":true},
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/friendsAccounts/"><span class="header-nav-menu-item__icon"><i class="fas fa-torah"></i></span><span class="header-nav-menu-item__text">友链</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/discover/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">发现</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">墨抒颖</div><div class="header-banner-info__subtitle">大多数人都高估了他们一天能做的事情，但低估了他们一年能做的事情</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">带你深入了解nginx基本登录认证（包含配置步骤）</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2021-08-14</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2021-08-14</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">1.1k</span></span><span class="post-meta-item post-meta-item--visitors"><span class="post-meta-item__icon"><i class="fas fa-eye"></i></span><span class="post-meta-item__info">阅读次数</span><span class="post-meta-item__value" id="busuanzi_value_page_pv"></span></span></div></header><div class="post-body"><div class="gallery"><img src="/uploads/logo/nginx-logo.jpg"></div><p><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://nginx_basic_auth.msy.plus/" >点击访问msy.plus获得更好的体验</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+
+        <h2 id="http基本验证的作用"   >
+          <a href="#http基本验证的作用" class="heading-link"><i class="fas fa-link"></i></a><a href="#http基本验证的作用" class="headerlink" title="http基本验证的作用"></a>http基本验证的作用</h2>
+      <ol>
+<li>http基本身份验证会从浏览器弹出登录窗口，</li>
+<li>简单明了,容易理解，</li>
+<li>对于面向终端用户的前台来说，不够友好，</li>
+<li>但对于内部员工操作的后台还是很有用，通常作为一层安全措施应用。</li>
+</ol>
+
+        <h2 id="这个登录认证安全吗？"   >
+          <a href="#这个登录认证安全吗？" class="heading-link"><i class="fas fa-link"></i></a><a href="#这个登录认证安全吗？" class="headerlink" title="这个登录认证安全吗？"></a>这个登录认证安全吗？</h2>
+      <p>auth_basic作为一个认证模块，在apache和nginx中都很常用，在许多没有自带认证的系统中，使用nginx的auth_basic做一个简单的认证，是常见的操作，开启了auth_basic认证之后，在访问的时候，会提示输入用户名密码进行认证。</p>
+<span id="more"></span>
+
+<p><img src="/uploads/nginx_basic_auth/Snipaste_2021-08-14_09-07-16.png"></p>
+<p>通常和auth_basic配合使用的一个工具是htpasswd，该工具来源于httpd-tools包，主要用于生成用户及其密码加密文件</p>
+
+        <h2 id="可能存在的问题"   >
+          <a href="#可能存在的问题" class="heading-link"><i class="fas fa-link"></i></a><a href="#可能存在的问题" class="headerlink" title="可能存在的问题"></a>可能存在的问题</h2>
+      <p>但是在htpasswd在生成密码时有一个问题</p>
+<p><img src="/uploads/nginx_basic_auth/Snipaste_2021-08-14_09-12-14.png"></p>
+<p>可以看到htpasswd总共有4种加密算法，分别是MD5、bcrypt、CRYPT、SHA，在httpd-tools 2.2的版本中，默认使用的是CRYPT加密算法来进行密码加密的，而httpd-tools 2.4的版本中，默认是使用MD5来进行密码加密的</p>
+<p>有人说明明SHA比MD5加密要安全性高，为什么新版本中用MD5作为默认加密算法？</p>
+<p>在httpd-tools 2.4的图中，最后一句话“The SHA algorithm does not use a salt and is less secure than the MD5 algorithm”翻译一下就是，没有加salt的SHA算法，并没有MD5安全</p>
+<p>salt在密码学中，叫做盐，是一个随机生成的字符串，在不加盐的哈希中，有一种破解方法就是彩虹表碰撞，原始密码通过加盐之后再进行散列，可以有效避免彩虹表攻击的暴力破解</p>
+
+        <h2 id="解决办法"   >
+          <a href="#解决办法" class="heading-link"><i class="fas fa-link"></i></a><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2>
+      <p>安全的处理方法是，更新httpd-tools到2.4版本，然后重新生成用户密码对，或在htpasswd生成密钥时，通过参数-m选择md5加密方式生成新的用户密码对</p>
+
+        <h2 id="模拟验证演示"   >
+          <a href="#模拟验证演示" class="heading-link"><i class="fas fa-link"></i></a><a href="#模拟验证演示" class="headerlink" title="模拟验证演示"></a>模拟验证演示</h2>
+      <p>这里为了例子我们新建一个站点</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">域名:     nginx_basic_auth.msy.plus</span><br><span class="line">登录名:    admin</span><br><span class="line">密码:     12345678</span><br></pre></td></tr></table></div></figure>
+
+<p>仅作为演示，生产环境不能使用这种极简单的密码</p>
+
+        <h3 id="生成供测试文件"   >
+          <a href="#生成供测试文件" class="heading-link"><i class="fas fa-link"></i></a><a href="#生成供测试文件" class="headerlink" title="生成供测试文件"></a>生成供测试文件</h3>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;&lt;h1&gt;welcome to nginx_basic_auth.msy.plus&lt;/h1&gt;&quot; &gt;&gt; ./nginx_basic_auth/index.html</span><br></pre></td></tr></table></div></figure>
+
+
+        <h3 id="配置nginx的http基本验证"   >
+          <a href="#配置nginx的http基本验证" class="heading-link"><i class="fas fa-link"></i></a><a href="#配置nginx的http基本验证" class="headerlink" title="配置nginx的http基本验证"></a>配置nginx的http基本验证</h3>
+      <p>在nginx.conf中检查是否有对conf.d目录的支持如不存在，添加它</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">include /usr/local/soft/nginx-1.18.0/conf/conf.d/*.conf;</span><br></pre></td></tr></table></div></figure>
+
+<blockquote>
+<p>说明：生产环境中，为了管理方便，会把每个server放到专用的conf文件中，不要混在一起而全写到nginx.conf中,修改和查找都不方便</p>
+</blockquote>
+
+        <h3 id="创建网站的server文件"   >
+          <a href="#创建网站的server文件" class="heading-link"><i class="fas fa-link"></i></a><a href="#创建网站的server文件" class="headerlink" title="创建网站的server文件"></a>创建网站的server文件</h3>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    auth_basic &quot;lhdtest.com admin&quot;;</span><br><span class="line">    auth_basic_user_file /usr/local/soft/nginx-1.18.0/conf/conf.d/admin.pwd;</span><br><span class="line"></span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  nginx_basic_auth.msy.plus</span><br><span class="line">    root         /data/site/admin/html;</span><br><span class="line">    index        index.html index.shtml  index.htm;</span><br><span class="line">    access_log      /data/nginx/logs/admin.access_log;</span><br><span class="line">    error_log       /data/nginx/logs/admin.error_log;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+
+        <h3 id="生成密码"   >
+          <a href="#生成密码" class="heading-link"><i class="fas fa-link"></i></a><a href="#生成密码" class="headerlink" title="生成密码"></a>生成密码</h3>
+      <p><strong>nginx仅需要一个密码文件作为验证，而该密码文件在何处生成并不重要，所以你只需要一个可以生成该密钥的方法即可</strong></p>
+<p>方法很多，可以用<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://download.csdn.net/download/fly_leopard/9926596" >python</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> 可以用go 或者用c</p>
+<p>这里我用的是windows下的centos子系统，直接生成该密钥上传到服务器即可</p>
+<p>生成工具选择htpasswd,htpasswd 是开源 http 服务器 apache httpd 的一个命令工具，用于生成 http 基本认证的密码文件。</p>
+
+        <h3 id="安装htpasswd"   >
+          <a href="#安装htpasswd" class="heading-link"><i class="fas fa-link"></i></a><a href="#安装htpasswd" class="headerlink" title="安装htpasswd"></a>安装htpasswd</h3>
+      
+        <h4 id="ubuntu安装："   >
+          <a href="#ubuntu安装：" class="heading-link"><i class="fas fa-link"></i></a><a href="#ubuntu安装：" class="headerlink" title="ubuntu安装："></a>ubuntu安装：</h4>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install apache2-utils</span><br></pre></td></tr></table></div></figure>
+
+
+        <h4 id="centos安装："   >
+          <a href="#centos安装：" class="heading-link"><i class="fas fa-link"></i></a><a href="#centos安装：" class="headerlink" title="centos安装："></a>centos安装：</h4>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install httpd</span><br></pre></td></tr></table></div></figure>
+
+
+        <h3 id="密钥生成选项"   >
+          <a href="#密钥生成选项" class="heading-link"><i class="fas fa-link"></i></a><a href="#密钥生成选项" class="headerlink" title="密钥生成选项"></a>密钥生成选项</h3>
+      <p>这里使用如下生成选项</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#-n:Don&#x27;t update file; display results on stdout //不更新文件；在标准输出上显示结果</span><br><span class="line">#-b:Use the password from the command line //从命令行使用密码</span><br><span class="line">#-m:Force MD5 encryption of the password //强制对密码进行MD5加密</span><br></pre></td></tr></table></div></figure>
+
+<p>输入命令生成密钥</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">htpasswd -nbm admin 12345678</span><br></pre></td></tr></table></div></figure>
+
+<p>可以看到输出有密钥</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">admin:$apr1$nkxLxBPa$EGa.u5yKuQ08m6g/8bGb9.</span><br></pre></td></tr></table></div></figure>
+
+<p>在你之前所指定的密码文件中，输入生成的内容即可</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">auth_basic_user_file /usr/local/soft/nginx-1.18.0/conf/conf.d/admin.pwd; // 对于windows server用户来说，路径可能略有不同</span><br></pre></td></tr></table></div></figure>
+
+
+        <h3 id="测试效果"   >
+          <a href="#测试效果" class="heading-link"><i class="fas fa-link"></i></a><a href="#测试效果" class="headerlink" title="测试效果"></a>测试效果</h3>
+      <p>进入<a href="https://msy.plus/">网站</a>输入正确的用户名和密码即可进入网站</p>
+
+        <h2 id="参考文章"   >
+          <a href="#参考文章" class="heading-link"><i class="fas fa-link"></i></a><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2>
+      <p><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1644731" >你的nginx登录认证安全吗？</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span><br><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.nginx.org.cn/article/detail/298" >配置http基本验证(Basic Auth)</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span><br><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.itbiancheng.com/linux/4807.html" >Centos安装htpasswd_Nginx中使用htpasswd</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://msy.plus">墨抒颖</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://msy.plus/2021/08/14/nginx-basic-auth/">https://msy.plus/2021/08/14/nginx-basic-auth/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://msy.plus/tags/%E8%BF%90%E7%BB%B4/">运维</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://msy.plus/tags/nginx/">nginx</a></span></div><div class="post-share"><div class="social-share" data-sites="qzone, qq, weibo, wechat, douban, linkedin, facebook, twitter, google">Share to: </div></div><div class="post-reward reward"><div class="reward-button">请我喝杯咖啡~</div><div class="reward-qrcode"><span class="reward-qrcode-alipay"><img class="reward-qrcode-alipay__img" src="/uploads/alipay.jpg"><div class="reward-qrcode-alipay__text">支付宝打赏</div></span><span class="reward-qrcode-wechat"><img class="reward-qrcode-wechat__img" src="/uploads/wechat.png"><div class="reward-qrcode-wechat__text">微信打赏</div></span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2021/08/23/macos-big-sur-usb-t/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">黑苹果big sur版本安装安卓USB共享网络（100%成功）</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2021/06/16/Hackintosh-msigs63vr-7rf/"><span class="paginator-prev__text">黑苹果安装（傻瓜式轻松安装）</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="disqus_thread"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#http%E5%9F%BA%E6%9C%AC%E9%AA%8C%E8%AF%81%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">1.</span> <span class="toc-text">
+          http基本验证的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%99%E4%B8%AA%E7%99%BB%E5%BD%95%E8%AE%A4%E8%AF%81%E5%AE%89%E5%85%A8%E5%90%97%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">
+          这个登录认证安全吗？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AF%E8%83%BD%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">3.</span> <span class="toc-text">
+          可能存在的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95"><span class="toc-number">4.</span> <span class="toc-text">
+          解决办法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E6%8B%9F%E9%AA%8C%E8%AF%81%E6%BC%94%E7%A4%BA"><span class="toc-number">5.</span> <span class="toc-text">
+          模拟验证演示</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E4%BE%9B%E6%B5%8B%E8%AF%95%E6%96%87%E4%BB%B6"><span class="toc-number">5.1.</span> <span class="toc-text">
+          生成供测试文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEnginx%E7%9A%84http%E5%9F%BA%E6%9C%AC%E9%AA%8C%E8%AF%81"><span class="toc-number">5.2.</span> <span class="toc-text">
+          配置nginx的http基本验证</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%BD%91%E7%AB%99%E7%9A%84server%E6%96%87%E4%BB%B6"><span class="toc-number">5.3.</span> <span class="toc-text">
+          创建网站的server文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E5%AF%86%E7%A0%81"><span class="toc-number">5.4.</span> <span class="toc-text">
+          生成密码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85htpasswd"><span class="toc-number">5.5.</span> <span class="toc-text">
+          安装htpasswd</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ubuntu%E5%AE%89%E8%A3%85%EF%BC%9A"><span class="toc-number">5.5.1.</span> <span class="toc-text">
+          ubuntu安装：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#centos%E5%AE%89%E8%A3%85%EF%BC%9A"><span class="toc-number">5.5.2.</span> <span class="toc-text">
+          centos安装：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%86%E9%92%A5%E7%94%9F%E6%88%90%E9%80%89%E9%A1%B9"><span class="toc-number">5.6.</span> <span class="toc-text">
+          密钥生成选项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E6%95%88%E6%9E%9C"><span class="toc-number">5.7.</span> <span class="toc-text">
+          测试效果</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="toc-number">6.</span> <span class="toc-text">
+          参考文章</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/uploads/pic-512x512.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">你可以在这些地方找到我</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/moshuying/" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="http://sfau.lt/bPbzVVJ/" target="_blank" rel="noopener" data-popover="思否" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">sf</span></a><a class="sidebar-ov-social-item" href="https://home.cnblogs.com/u/moshuying/" target="_blank" rel="noopener" data-popover="social.bokeyuan" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">博客园</span></a><a class="sidebar-ov-social-item" href="https://juejin.im/user/2700056289356936/" target="_blank" rel="noopener" data-popover="social.juejin" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">掘金</span></a><a class="sidebar-ov-social-item" href="http://weibo.cn/ismoshuying" target="_blank" rel="noopener" data-popover="微博" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-weibo"></i></span></a><a class="sidebar-ov-social-item" href="https://www.zhihu.com/people/mo-shu-ying-54" target="_blank" rel="noopener" data-popover="知乎" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">知</span></a><a class="sidebar-ov-social-item" href="https://blog.csdn.net/qq_34846662" target="_blank" rel="noopener" data-popover="social.csdn" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">csdn</span></a></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-email"><a class="sidebar-ov-feed-email__link" href="http://eepurl.com/heNNvH" target="_blank" rel="noopener"><span class="sidebar-ov-feed-email__icon"><i class="fas fa-envelope"></i></span><span>Email 订阅</span></a></span><span class="sidebar-ov-feed-rss"><a class="sidebar-ov-feed-rss__link" href="/atom.xml" target="_blank" rel="noopener"><span class="sidebar-ov-feed-rss__icon"><i class="fas fa-rss"></i></span><span>RSS 订阅</span></a></span></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">30</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">14</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">30</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>墨抒颖</span><span class="footer__devider">|</span><span><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn" >蜀ICP备19031274号-1</a></span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.4.0</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div><div class="busuanzi"><span class="busuanzi-siteuv"><span class="busuanzi-siteuv__icon"><i class="fas fa-user"></i></span><span class="busuanzi-siteuv__info">访问人数</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_uv"></span></span><span class="busuanzi-sitepv"><span class="busuanzi-siteuv__icon"><i class="fas fa-eye"></i></span><span class="busuanzi-siteuv__info">浏览总量</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/ribbon.js@latest/dist/ribbon.min.js" size="300" alpha="0.6" zIndex="-1"></script><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.json';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章无标题 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);
+
+function safeOpenUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+
+function extSearch(engine) {
+  var engines = {
+    google: 'https://www.google.com/search?q=',
+    bing: 'https://cn.bing.com/search?q=',
+    baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+  };
+  var host = window.location.host;
+  var query = $('.search-input input').val().toLowerCase().trim();
+  var uri = engines[engine] + query + ' site:' + host;
+
+  if (query) {
+    safeOpenUrl(uri);
+  } else {
+    Stun.utils.popAlert('warning', '请输入字符');
+  }
+}
+
+var assistSearchList = window.CONFIG.assistSearch;
+
+if (Array.isArray(assistSearchList)) {
+  assistSearchList.forEach(function (name) {
+    document.querySelector('.search-btns-item--' + name).addEventListener('click', function () {
+      extSearch(name);
+    }, false);
+  });
+}</script><script src="https://cdn.jsdelivr.net/npm/pjax@latest/pjax.min.js"></script><script>window.addEventListener('DOMContentLoaded', function () {
+  var pjax = new Pjax({"selectors":["head title","#main",".pjax-reload"],"history":true,"scrollTo":false,"scrollRestoration":false,"cacheBust":false,"debug":false,"currentUrlFullReload":false,"timeout":0});
+  // 加载进度条的计时器
+  var loadingTimer = null;
+
+  // 重置页面 Y 方向上的滚动偏移量
+  document.addEventListener('pjax:send', function () {
+    $('.header-nav-menu').removeClass('show');
+    if (CONFIG.pjax && CONFIG.pjax.avoidBanner) {
+      $('html').velocity('scroll', {
+        duration: 500,
+        offset: $('#header').height(),
+        easing: 'easeInOutCubic'
+      });
+    }
+
+    var loadingBarWidth = 20;
+    var MAX_LOADING_WIDTH = 95;
+
+    $('.loading-bar').addClass('loading');
+    $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    clearInterval(loadingTimer);
+    loadingTimer = setInterval(function () {
+      loadingBarWidth += 3;
+      if (loadingBarWidth > MAX_LOADING_WIDTH) {
+        loadingBarWidth = MAX_LOADING_WIDTH;
+      }
+      $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    }, 500);
+  }, false);
+
+  window.addEventListener('pjax:complete', function () {
+    clearInterval(loadingTimer);
+    $('.loading-bar__progress').css('width', '100%');
+    $('.loading-bar').removeClass('loading');
+    setTimeout(function () {
+      $('.loading-bar__progress').css('width', '0');
+    }, 400);
+    $('link[rel=prefetch], script[data-pjax-rm]').each(function () {
+      $(this).remove();
+    });
+    $('script[data-pjax], #pjax-reload script').each(function () {
+      $(this).parent().append($(this).remove());
+    });
+
+    if (Stun.utils.pjaxReloadBoot) {
+      Stun.utils.pjaxReloadBoot();
+    }
+    if (Stun.utils.pjaxReloadScroll) {
+      Stun.utils.pjaxReloadScroll();
+    }
+    if (Stun.utils.pjaxReloadSidebar) {
+      Stun.utils.pjaxReloadSidebar();
+    }
+    if (false) {
+      if (Stun.utils.pjaxReloadHeader) {
+        Stun.utils.pjaxReloadHeader();
+      }
+      if (Stun.utils.pjaxReloadScrollIcon) {
+        Stun.utils.pjaxReloadScrollIcon();
+      }
+      if (Stun.utils.pjaxReloadLocalSearch) {
+        Stun.utils.pjaxReloadLocalSearch();
+      }
+    }
+  }, false);
+}, false);</script><div id="pjax-reload"><script src="https://cdn.jsdelivr.net/npm/quicklink@1.0.1/dist/quicklink.umd.js"></script><script>function initQuicklink() {
+  quicklink({
+    timeout: '10000',
+    priority: true,
+    ignores: [uri => uri.includes('#'), uri => uri === 'https://msy.plus/2021/08/14/nginx-basic-auth/', /\/api\/?/,uri => uri.includes('.xml'),uri => uri.includes('.zip'),(uri, el) => el.hasAttribute('nofollow'),(uri, el) => el.hasAttribute('noprefetch')]
+  });
+}
+
+if (true || false) {
+  initQuicklink();
+} else {
+  window.addEventListener('DOMContentLoaded', initQuicklink, false);
+}</script><script src="https://cdn.jsdelivr.net/gh/sukkaw/busuanzi@latest/bsz.pure.mini.js" async></script></div><script data-pjax="">function loadDisqus () {
+  if (!document.getElementById('disqus_thread')) {
+    return;
+  }
+  if (window.DISQUS) {
+    DISQUS.reset({
+      reload: true,
+      config: function () {
+        this.page.url = 'https://msy.plus/2021/08/14/nginx-basic-auth/';
+        this.page.identifier = '2021/08/14/nginx-basic-auth/';
+        this.page.title = '带你深入了解nginx基本登录认证（包含配置步骤）';
+      }
+    });
+  } else {
+    var d = document;
+    var sc = d.createElement('script');
+    var se = d.createElement('script');
+
+    if (true) {
+      sc.src = 'https://msy-plus.disqus.com/count.js';
+      sc.id = 'dsq-count-scr';
+      sc.async = true;
+      if (true) {
+        sc.setAttribute('data-pjax', '');
+      }
+      (d.head || d.body).appendChild(sc);
+    }
+    se.src = 'https://msy-plus.disqus.com/embed.js';
+    (d.head || d.body).appendChild(se);
+  }
+}
+
+if (true) {
+  loadDisqus();
+} else {
+  window.addEventListener('DOMContentLoaded', loadDisqus, false);
+}</script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script><script type="application/json" src="/search.json"></script></body></html>

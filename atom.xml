@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>墨抒颖</title>
+  <icon>https://msy.plus/icon.png</icon>
+  <subtitle>大多数人都高估了他们一天能做的事情，但低估了他们一年能做的事情</subtitle>
+  <link href="https://msy.plus/atom.xml" rel="self"/>
+  
+  <link href="https://msy.plus/"/>
+  <updated>2021-04-08T07:24:09.790Z</updated>
+  <id>https://msy.plus/</id>
+  
+  <author>
+    <name>墨抒颖</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>黑苹果big sur版本安装安卓USB共享网络（100%成功）</title>
+    <link href="https://msy.plus/2021/08/23/macos-big-sur-usb-t/"/>
+    <id>https://msy.plus/2021/08/23/macos-big-sur-usb-t/</id>
+    <published>2021-08-23T12:59:06.585Z</published>
+    <updated>2021-04-08T07:24:09.790Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;黑苹果是支持USB连接手机以共享手机网络的，但在有些机器上这个功能并不能较好的运行，所以我在一番查找后了解到&lt;span class=&quot;exturl&quot;&gt;&lt;a class=&quot;exturl__link&quot;   href=&quot;https://github.com/jwise/HoRNDIS/issues/132&quot; &gt;HoRNDIS&lt;/a&gt;&lt;span class=&quot;exturl__icon&quot;&gt;&lt;i class=&quot;fas fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/span&gt;是可以让黑苹果支持这个功能的，但可惜的是Big Sur版本并不能正常安装运行，所以这里简单记录下我的安装过程。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Hackintosh" scheme="https://msy.plus/categories/Hackintosh/"/>
+    
+    
+    <category term="Hackintosh" scheme="https://msy.plus/tags/Hackintosh/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>带你深入了解nginx基本登录认证（包含配置步骤）</title>
+    <link href="https://msy.plus/2021/08/14/nginx-basic-auth/"/>
+    <id>https://msy.plus/2021/08/14/nginx-basic-auth/</id>
+    <published>2021-08-14T09:53:25.000Z</published>
+    <updated>2021-08-14T01:59:59.640Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;span class=&quot;exturl&quot;&gt;&lt;a class=&quot;exturl__link&quot;   href=&quot;http://nginx_basic_auth.msy.plus/&quot; &gt;点击访问msy.plus获得更好的体验&lt;/a&gt;&lt;span class=&quot;exturl__icon&quot;&gt;&lt;i class=&quot;fas fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+
+        &lt;h2 id=&quot;http基本验证的作用&quot;   &gt;
+          &lt;a href=&quot;#http基本验证的作用&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a href=&quot;#http基本验证的作用&quot; class=&quot;headerlink&quot; title=&quot;http基本验证的作用&quot;&gt;&lt;/a&gt;http基本验证的作用&lt;/h2&gt;
+      &lt;ol&gt;
+&lt;li&gt;http基本身份验证会从浏览器弹出登录窗口，&lt;/li&gt;
+&lt;li&gt;简单明了,容易理解，&lt;/li&gt;
+&lt;li&gt;对于面向终端用户的前台来说，不够友好，&lt;/li&gt;
+&lt;li&gt;但对于内部员工操作的后台还是很有用，通常作为一层安全措施应用。&lt;/li&gt;
+&lt;/ol&gt;
+
+        &lt;h2 id=&quot;这个登录认证安全吗？&quot;   &gt;
+          &lt;a href=&quot;#这个登录认证安全吗？&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a href=&quot;#这个登录认证安全吗？&quot; class=&quot;headerlink&quot; title=&quot;这个登录认证安全吗？&quot;&gt;&lt;/a&gt;这个登录认证安全吗？&lt;/h2&gt;
+      &lt;p&gt;auth_basic作为一个认证模块，在apache和nginx中都很常用，在许多没有自带认证的系统中，使用nginx的auth_basic做一个简单的认证，是常见的操作，开启了auth_basic认证之后，在访问的时候，会提示输入用户名密码进行认证。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="nginx" scheme="https://msy.plus/categories/nginx/"/>
+    
+    
+    <category term="运维" scheme="https://msy.plus/tags/%E8%BF%90%E7%BB%B4/"/>
+    
+    <category term="nginx" scheme="https://msy.plus/tags/nginx/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>黑苹果安装（傻瓜式轻松安装）</title>
+    <link href="https://msy.plus/2021/06/16/Hackintosh-msigs63vr-7rf/"/>
+    <id>https://msy.plus/2021/06/16/Hackintosh-msigs63vr-7rf/</id>
+    <published>2021-06-15T23:12:25.000Z</published>
+    <updated>2021-08-03T14:14:07.898Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;这里写一篇给小白用户看的超级简单的黑苹果安装教程，按照目前的情况来看能保证100%安装起来。不过看之前也要有一点点的基础&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Hackintosh" scheme="https://msy.plus/categories/Hackintosh/"/>
+    
+    
+    <category term="Hackintosh" scheme="https://msy.plus/tags/Hackintosh/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>持续集成 travisCI</title>
+    <link href="https://msy.plus/2021/05/13/travis_ci/"/>
+    <id>https://msy.plus/2021/05/13/travis_ci/</id>
+    <published>2021-05-12T17:43:25.000Z</published>
+    <updated>2021-08-03T14:14:07.904Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">
+        &lt;h1 id=&quot;什么是持续集成？&quot;   &gt;
+          &lt;a href=&quot;#什么是持续集成？&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a href=&quot;#什么是持续集成？&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="travisCI" scheme="https://msy.plus/categories/travisCI/"/>
+    
+    
+    <category term="travisCI" scheme="https://msy.plus/tags/travisCI/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>git常用操作（续）</title>
+    <link href="https://msy.plus/2021/03/24/git-base-manipulate/"/>
+    <id>https://msy.plus/2021/03/24/git-base-manipulate/</id>
+    <published>2021-03-24T11:02:25.000Z</published>
+    <updated>2021-08-03T14:14:07.899Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;文件的修改、回退、删除等&lt;br&gt;远程仓库的相关操作&lt;br&gt;分支管理&lt;br&gt;标签管理&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="git" scheme="https://msy.plus/categories/git/"/>
+    
+    
+    <category term="git" scheme="https://msy.plus/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>白嫖jetbrains全家桶（IDEA,PyCharm,WebStorm,Clion,GoLand）免费正版</title>
+    <link href="https://msy.plus/2021/01/29/jetbarins-free-account/"/>
+    <id>https://msy.plus/2021/01/29/jetbarins-free-account/</id>
+    <published>2021-01-29T11:02:25.000Z</published>
+    <updated>2021-05-12T12:04:55.992Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;时下流行的编辑器中，jetbrains可谓是占据了半壁江山。但是他的价格对于学生来说确实有些高昂，这里简单说下白嫖的方法。&lt;/p&gt;
+&lt;p&gt;如果你所在的大学有教育邮箱，那么可以直接找学校要教育邮箱即可，申请起来也比较轻松便捷。&lt;/p&gt;
+&lt;p&gt;&lt;span</summary>
+        
+      
+    
+    
+    
+    <category term="git" scheme="https://msy.plus/categories/git/"/>
+    
+    
+    <category term="git" scheme="https://msy.plus/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java http请求及常见数据交互格式处理</title>
+    <link href="https://msy.plus/2020/12/21/android-http-request/"/>
+    <id>https://msy.plus/2020/12/21/android-http-request/</id>
+    <published>2020-12-21T11:50:25.000Z</published>
+    <updated>2021-08-03T14:14:07.899Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;在android项目的开发过程中网络请求是非常常用的。这里简单介绍两种方法&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在android中无论使用哪种方法发起网络请求，都需要先声明网络权限&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight xml&quot;&gt;&lt;div class=&quot;table-container&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- .AndroidManifests.xml --&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;manifest&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;xmlns:android&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&amp;quot;http://schemas.android.com/apk/res/android&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;    &lt;span class=&quot;attr&quot;&gt;xmlns:tools&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&amp;quot;http://schemas.android.com/tools&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;    &lt;span class=&quot;attr&quot;&gt;package&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&amp;quot;com.example.moshuying&amp;quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;uses-permission&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;android:name&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&amp;quot;android.permission.INTERNET&amp;quot;&lt;/span&gt; /&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;manifest&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
+
+        &lt;h1 id=&quot;http请求&quot;   &gt;
+          &lt;a href=&quot;#http请求&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a href=&quot;#http请求&quot; class=&quot;headerlink&quot; title=&quot;http请求&quot;&gt;&lt;/a&gt;http请求&lt;/h1&gt;
+      &lt;p&gt;通常在android项目中会使用两种（也有可能基于这两种进行封装）请求方式，HttpURLConnection是google较为推荐的一种。okhttp也不错，往往能正确获取到页面数据。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="android" scheme="https://msy.plus/categories/android/"/>
+    
+    
+    <category term="android" scheme="https://msy.plus/tags/android/"/>
+    
+    <category term="多线程" scheme="https://msy.plus/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>http跨域权限信息问题解决方案</title>
+    <link href="https://msy.plus/2020/11/11/http-credentials/"/>
+    <id>https://msy.plus/2020/11/11/http-credentials/</id>
+    <published>2020-11-11T11:00:25.000Z</published>
+    <updated>2021-06-18T12:02:13.606Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;浏览器报&lt;code&gt;The value of the &amp;#39;Access-Control-Allow-Origin&amp;#39; header in the response must not be the wildcard &amp;#39;*&amp;#39; when the request&amp;#39;s credentials mode is &amp;#39;include&amp;#39;. &lt;/code&gt;问题的解决方案&lt;/p&gt;
+&lt;p&gt;详细错误信息 &lt;code&gt;Access to XMLHttpRequest at &amp;#39;http://localhost:7894/Login&amp;#39; from origin &amp;#39;http://localhost:8080&amp;#39; has been blocked by CORS policy: Response to preflight request doesn&amp;#39;t pass access control check: The value of the &amp;#39;Access-Control-Allow-Origin&amp;#39; header in the response must not be the wildcard &amp;#39;*&amp;#39; when the request&amp;#39;s credentials mode is &amp;#39;include&amp;#39;. The credentials mode of requests initiated by the XMLHttpRequest is controlled by the withCredentials attribute. &lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;前端 vue-antd-admin&lt;br&gt;后端 java servlet&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="android" scheme="https://msy.plus/categories/android/"/>
+    
+    
+    <category term="android" scheme="https://msy.plus/tags/android/"/>
+    
+    <category term="material design" scheme="https://msy.plus/tags/material-design/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>hexo中运行shader和threejs</title>
+    <link href="https://msy.plus/2020/10/05/hexo-threejs/"/>
+    <id>https://msy.plus/2020/10/05/hexo-threejs/</id>
+    <published>2020-10-05T03:25:25.000Z</published>
+    <updated>2021-08-03T14:14:07.901Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;最近想在hexo中嵌入一些shader，折腾了一些时间后终于完善，实际上用这种方法不仅可以在hexo中嵌入shader,也可以嵌入babylonjs,pxixjs,Layabox,Egret,Cocos2等，先看效果，原理什么的其实很简单。&lt;span class=&quot;exturl&quot;&gt;&lt;a class=&quot;exturl__link&quot;   href=&quot;https://github.com/moshuying/nodeEnv/blob/master/hexo-three&quot; &gt;示例源码&lt;/a&gt;&lt;span class=&quot;exturl__icon&quot;&gt;&lt;i class=&quot;fas fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;由于一些shader特别消耗显卡性能，在&lt;code&gt;glsl_snippets.js&lt;/code&gt;中判定如果第一帧渲染时间超过&lt;strong&gt;0.4秒&lt;/strong&gt;就不再渲染了。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;也可以点击shader暂停渲染&lt;/strong&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="three" scheme="https://msy.plus/categories/three/"/>
+    
+    
+    <category term="three" scheme="https://msy.plus/tags/three/"/>
+    
+    <category term="shader" scheme="https://msy.plus/tags/shader/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>threejs 中的shader效果</title>
+    <link href="https://msy.plus/2020/10/05/threejs-shader/"/>
+    <id>https://msy.plus/2020/10/05/threejs-shader/</id>
+    <published>2020-10-04T17:43:25.000Z</published>
+    <updated>2021-08-03T14:14:07.903Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;这里是我移植自 shaderToy 或自己制作的一些 shader 合集，如何在 hexo 中运行 threejs 和 shader 参考这篇文章。&lt;/p&gt;
+
+        &lt;h1 id=&quot;扎点底部扫光&quot;   &gt;
+          &lt;a href=&quot;#扎点底部扫光&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a href=&quot;#扎点底部扫光&quot; class=&quot;headerlink&quot; title=&quot;扎点底部扫光&quot;&gt;&lt;/a&gt;扎点底部扫光&lt;/h1&gt;</summary>
+    
+    
+    
+    <category term="three" scheme="https://msy.plus/categories/three/"/>
+    
+    
+    <category term="three" scheme="https://msy.plus/tags/three/"/>
+    
+    <category term="shader" scheme="https://msy.plus/tags/shader/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android 文件分享</title>
+    <link href="https://msy.plus/2020/10/04/android-document-sharing/"/>
+    <id>https://msy.plus/2020/10/04/android-document-sharing/</id>
+    <published>2020-10-03T20:49:25.000Z</published>
+    <updated>2021-04-08T07:24:09.783Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;在阅读&lt;span class=&quot;exturl&quot;&gt;&lt;a class=&quot;exturl__link&quot;   href=&quot;https://moshuying.top/2020/10/02/reading-book-android/&quot; &gt;Android 移动应用开发基础教程 微课版&lt;/a&gt;&lt;span class=&quot;exturl__icon&quot;&gt;&lt;i class=&quot;fas fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/span&gt; 第54页的启动另一个应用中的活动时,当时想到应该可以做出类似于各大平台的分享页面一样的功能，便搜集资料看到了这位大神给出的&lt;span class=&quot;exturl&quot;&gt;&lt;a class=&quot;exturl__link&quot;   href=&quot;https://www.jianshu.com/p/9522e24713e1&quot; &gt;案例&lt;/a&gt;&lt;span class=&quot;exturl__icon&quot;&gt;&lt;i class=&quot;fas fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/span&gt;，具体代码在大神的&lt;span class=&quot;exturl&quot;&gt;&lt;a class=&quot;exturl__link&quot;   href=&quot;https://github.com/gudd1991116/IntentShare&quot; &gt;仓库&lt;/a&gt;&lt;span class=&quot;exturl__icon&quot;&gt;&lt;i class=&quot;fas fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/span&gt;中,但是我使用的Android SDK以及Android studio的版本和大神的不一样，使用大神的代码出现了分享文件问题，认真解决发现了这里面还别有不少知识。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="android" scheme="https://msy.plus/categories/android/"/>
+    
+    
+    <category term="android" scheme="https://msy.plus/tags/android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android 移动应用开发基础教程 微课版</title>
+    <link href="https://msy.plus/2020/10/03/reading-book-android/"/>
+    <id>https://msy.plus/2020/10/03/reading-book-android/</id>
+    <published>2020-10-02T23:40:25.000Z</published>
+    <updated>2021-08-19T11:51:56.565Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;记录阅读 《Android 移动应用开发基础教程 微课版》 ISBN-978-7-115-47309-7 遇到的坑&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;android studio version 4.0.1&lt;/li&gt;
+&lt;li&gt;android SDK 10.0+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;span class=&quot;exturl&quot;&gt;&lt;a class=&quot;exturl__link&quot;   href=&quot;https://github.com/moshuying/androidDev.git&quot; &gt;git仓库&lt;/a&gt;&lt;span class=&quot;exturl__icon&quot;&gt;&lt;i class=&quot;fas fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;相关文章&lt;br&gt;&lt;span class=&quot;exturl&quot;&gt;&lt;a class=&quot;exturl__link&quot;   href=&quot;https://moshuying.top/2020/10/09/android-http-request/&quot; &gt;Java http请求及常见数据交互格式处理&lt;/a&gt;&lt;span class=&quot;exturl__icon&quot;&gt;&lt;i class=&quot;fas fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="android" scheme="https://msy.plus/categories/android/"/>
+    
+    
+    <category term="android" scheme="https://msy.plus/tags/android/"/>
+    
+    <category term="读书" scheme="https://msy.plus/tags/%E8%AF%BB%E4%B9%A6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>uml快速入门(弹射起步)</title>
+    <link href="https://msy.plus/2020/09/30/uml-quick-start/"/>
+    <id>https://msy.plus/2020/09/30/uml-quick-start/</id>
+    <published>2020-09-29T22:19:25.000Z</published>
+    <updated>2021-04-08T07:24:09.798Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;统一建模语言（英语：Unified Modeling Language，缩写 UML）是非专利的第三代建模和规约语言。UML是一种开放的方法，用于说明、可视化、构建和编写一个正在开发的、面向对象的、软件密集系统的制品的开放方法。UML展现了一系列最佳工程实践，这些最佳实践在对大规模，复杂系统进行建模方面，特别是在软件架构层次已经被验证有效。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="设计模式" scheme="https://msy.plus/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    
+    <category term="uml" scheme="https://msy.plus/tags/uml/"/>
+    
+    <category term="设计模式" scheme="https://msy.plus/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>前端动画框架GSAP框架随笔</title>
+    <link href="https://msy.plus/2020/07/10/js-gsap/"/>
+    <id>https://msy.plus/2020/07/10/js-gsap/</id>
+    <published>2020-07-09T23:40:25.000Z</published>
+    <updated>2021-06-18T12:02:41.328Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;gsap是目前非常流行的前端动画框架，可以非常轻松构造出复杂的动画效果，这里仅对我实际使用中的一些例子进行总结&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="android" scheme="https://msy.plus/categories/android/"/>
+    
+    
+    <category term="js" scheme="https://msy.plus/tags/js/"/>
+    
+    <category term="gsap" scheme="https://msy.plus/tags/gsap/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>git常用操作</title>
+    <link href="https://msy.plus/2020/06/18/git-operations/"/>
+    <id>https://msy.plus/2020/06/18/git-operations/</id>
+    <published>2020-06-17T23:02:25.000Z</published>
+    <updated>2021-08-03T14:14:07.900Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;关联多个远程库&lt;br&gt;在liunx下避免多次输入账户密码的方法&lt;br&gt;git clone 速度太慢解决方法&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="git" scheme="https://msy.plus/categories/git/"/>
+    
+    
+    <category term="git" scheme="https://msy.plus/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>docker给运行中的容器添加映射端口</title>
+    <link href="https://msy.plus/2020/05/13/docker-running-mapping-port/"/>
+    <id>https://msy.plus/2020/05/13/docker-running-mapping-port/</id>
+    <published>2020-05-12T22:14:25.000Z</published>
+    <updated>2021-06-18T11:34:00.308Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;给运行中的容器添加映射端口&quot;   &gt;
+          &lt;a href=&quot;#给运行中的容器添加映射端口&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a href=&quot;#给运行中的容器添加映射端口&quot; class=&quot;headerlink&quot; title=&quot;给运行中的容器添加映射端口&quot;&gt;&lt;/a&gt;给运行中的容器添加映射端口&lt;/h2&gt;
+      &lt;p&gt;docker 可以给运行给的容器添加映射端口&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="docker" scheme="https://msy.plus/categories/docker/"/>
+    
+    
+    <category term="docker" scheme="https://msy.plus/tags/docker/"/>
+    
+    <category term="运维" scheme="https://msy.plus/tags/%E8%BF%90%E7%BB%B4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>docker安装hadoop</title>
+    <link href="https://msy.plus/2020/04/30/docker-install-hadoop/"/>
+    <id>https://msy.plus/2020/04/30/docker-install-hadoop/</id>
+    <published>2020-04-29T22:19:25.000Z</published>
+    <updated>2021-06-18T11:33:48.267Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;将hadoop安装在docker上，方便部署&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="docker" scheme="https://msy.plus/categories/docker/"/>
+    
+    
+    <category term="hadoop" scheme="https://msy.plus/tags/hadoop/"/>
+    
+    <category term="docker" scheme="https://msy.plus/tags/docker/"/>
+    
+    <category term="运维" scheme="https://msy.plus/tags/%E8%BF%90%E7%BB%B4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ReactNative在macos上报错的解决方法</title>
+    <link href="https://msy.plus/2020/04/16/react-navive/"/>
+    <id>https://msy.plus/2020/04/16/react-navive/</id>
+    <published>2020-04-15T23:23:25.000Z</published>
+    <updated>2021-08-03T14:14:07.902Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;报错详情&quot;   &gt;
+          &lt;a href=&quot;#报错详情&quot; class=&quot;heading-link&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;a href=&quot;#报错详情&quot; class=&quot;headerlink&quot; title=&quot;报错详情&quot;&gt;&lt;/a&gt;报错详情&lt;/h1&gt;
+      &lt;p&gt;执行 &lt;code&gt;pod install&lt;/code&gt; 后的错误情况&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;warning: Insecure world writable dir /usr/local/opt in PATH, mode 040777&lt;br&gt;Analyzing dependencies&lt;br&gt;Fetching podspec for &lt;code&gt;DoubleConversion&lt;/code&gt; from &lt;code&gt;../node_modules/react-native/third-party-podspecs/DoubleConversion.&amp;gt;podspec&lt;/code&gt;&lt;br&gt;Fetching podspec for &lt;code&gt;Folly&lt;/code&gt; from &lt;code&gt;../node_modules/react-native/third-party-podspecs/Folly.podspec&lt;/code&gt;&lt;br&gt;Fetching podspec for &lt;code&gt;glog&lt;/code&gt; from &lt;code&gt;../node_modules/react-native/third-party-podspecs/glog.podspec&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="ReactNative" scheme="https://msy.plus/categories/ReactNative/"/>
+    
+    
+    <category term="ReactNative" scheme="https://msy.plus/tags/ReactNative/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>js转码与解码emoji</title>
+    <link href="https://msy.plus/2020/03/29/js-transcoding-emoji/"/>
+    <id>https://msy.plus/2020/03/29/js-transcoding-emoji/</id>
+    <published>2020-03-28T17:39:25.000Z</published>
+    <updated>2021-06-18T11:33:30.325Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;想要为他人鼓掌👏？想用emoji来表达工作🧑‍💻？想及时更新状态💃？在人类和身体分类里有各种手势、角色cosplay、人物活动，你的日常活动全都可以找到👀。用生动的emoji来表达有趣的一天🚴，请继续往下探索吧👇。&lt;/p&gt;
+&lt;p&gt;这是主分类👌 人类和身体的表情符号列表页面。它包括16个子分类，例如：🖐 手掌张开, 👌 几根手指, 👈 一根手指, 👍 合上手掌, 🤝 双手, ✍️ 动作手, 👃 部分身体, 👦 人物, 🙋 人物手势, 👨‍🍳 人物角色, 🎅 虚构人物, 🏃 人物活动, 🚴 人物运动, 🛌 人物休息, 👨‍👩‍👧‍👦 家庭, 👣 人物标记。您可以单击下面的链接查看详细信息并复制表情符号。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="javascript" scheme="https://msy.plus/categories/javascript/"/>
+    
+    
+    <category term="javascript" scheme="https://msy.plus/tags/javascript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JavaScript闭包使用姿势指南</title>
+    <link href="https://msy.plus/2019/11/29/js-closure/"/>
+    <id>https://msy.plus/2019/11/29/js-closure/</id>
+    <published>2019-11-28T16:41:20.000Z</published>
+    <updated>2021-06-18T11:31:27.027Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;闭包就是指&lt;strong&gt;能够访问另一个函数作用域的变量的函数&lt;/strong&gt;,闭包就是一个函数,能够访问其他函数的作用域中的变量,js 有一个全局对象,在浏览器下是 window,node 下是 global,所有的函数都在这个对象下,也能访问这个对象下的变量,这也就是说,&lt;strong&gt;js 中的所有函数都是闭包&lt;/strong&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="javascript" scheme="https://msy.plus/categories/javascript/"/>
+    
+    
+    <category term="javascript" scheme="https://msy.plus/tags/javascript/"/>
+    
+    <category term="closure" scheme="https://msy.plus/tags/closure/"/>
+    
+  </entry>
+  
+</feed>

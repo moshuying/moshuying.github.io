@@ -1,0 +1,618 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><script>var _paq = window._paq = window._paq || [];
+_paq.push(['trackPageView']);
+_paq.push(['enableLinkTracking']);  
+var u="//matomo.analysis.msy.plus/";
+_paq.push(['setTrackerUrl', u+'matomo.php']);
+_paq.push(['setSiteId', '1']);
+var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);</script><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="theme-color" content="#54bcff"><link rel="manifest" href="/manifest.json?v=2.6.2"><link rel="icon" href="/uploads/pic-300x256.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/uploads/pic-512x512.jpg?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="记录阅读 《Android 移动应用开发基础教程 微课版》 ISBN-978-7-115-47309-7 遇到的坑  android studio version 4.0.1 android SDK 10.0+  git仓库 相关文章Java http请求及常见数据交互格式处理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 移动应用开发基础教程 微课版">
+<meta property="og:url" content="https://msy.plus/2020/10/03/reading-book-android/index.html">
+<meta property="og:site_name" content="墨抒颖">
+<meta property="og:description" content="记录阅读 《Android 移动应用开发基础教程 微课版》 ISBN-978-7-115-47309-7 遇到的坑  android studio version 4.0.1 android SDK 10.0+  git仓库 相关文章Java http请求及常见数据交互格式处理">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://msy.plus/uploads/android-logo.png">
+<meta property="article:published_time" content="2020-10-02T23:40:25.000Z">
+<meta property="article:modified_time" content="2021-08-19T11:51:56.565Z">
+<meta property="article:author" content="墨抒颖">
+<meta property="article:tag" content="android">
+<meta property="article:tag" content="读书">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://msy.plus/uploads/android-logo.png"><title>Android 移动应用开发基础教程 微课版 | 墨抒颖</title><link ref="canonical" href="https://msy.plus/2020/10/03/reading-book-android/"><link rel="alternate" href="/atom.xml" type="application/atom+xml"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: true,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: {"avoidBanner":true},
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/friendsAccounts/"><span class="header-nav-menu-item__icon"><i class="fas fa-torah"></i></span><span class="header-nav-menu-item__text">友链</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/discover/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">发现</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">墨抒颖</div><div class="header-banner-info__subtitle">大多数人都高估了他们一天能做的事情，但低估了他们一年能做的事情</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><div class="sticky-top" data-popover="置顶文章" data-popover-pos="up"><span class="sticky-top__icon"><i class="fas fa-thumbtack"></i></span></div><h1 class="post-title">Android 移动应用开发基础教程 微课版</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2020-10-02</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2021-08-19</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">2.9k</span></span><span class="post-meta-item post-meta-item--visitors"><span class="post-meta-item__icon"><i class="fas fa-eye"></i></span><span class="post-meta-item__info">阅读次数</span><span class="post-meta-item__value" id="busuanzi_value_page_pv"></span></span></div></header><div class="post-body"><div class="gallery"><img src="/uploads/android-logo.png"></div><p>记录阅读 《Android 移动应用开发基础教程 微课版》 ISBN-978-7-115-47309-7 遇到的坑</p>
+<ul>
+<li>android studio version 4.0.1</li>
+<li>android SDK 10.0+</li>
+</ul>
+<p><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/moshuying/androidDev.git" >git仓库</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p>相关文章<br><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://moshuying.top/2020/10/09/android-http-request/" >Java http请求及常见数据交互格式处理</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<span id="more"></span>
+
+
+        <h1 id="第一章-环境部署"   >
+          <a href="#第一章-环境部署" class="heading-link"><i class="fas fa-link"></i></a><a href="#第一章-环境部署" class="headerlink" title="第一章 环境部署"></a>第一章 环境部署</h1>
+      <p>jetbrains会帮你安好android studio</p>
+<p><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.jetbrains.com/toolbox-app/download/download-thanks.html" >下载jetbrains toolbox</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p>安装好后列表里有Android studio 点击安装即可，也可以切换版本，我这里用的时4.0.1版</p>
+<p>进入Android studio 后如果你没有安装 android sdk 会让你安装 sdk 这里可能需要科学上网，另外后面程序下载依赖也需要用到科学上网。</p>
+
+        <h1 id="gradle"   >
+          <a href="#gradle" class="heading-link"><i class="fas fa-link"></i></a><a href="#gradle" class="headerlink" title="gradle"></a>gradle</h1>
+      
+        <h2 id="引用包"   >
+          <a href="#引用包" class="heading-link"><i class="fas fa-link"></i></a><a href="#引用包" class="headerlink" title="引用包"></a>引用包</h2>
+      <figure class="highlight gradle"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">implementation <span class="string">&#x27;com.google.android.material:material:1.2.1&#x27;</span></span><br></pre></td></tr></table></div></figure>
+
+
+        <h2 id="设置版本号"   >
+          <a href="#设置版本号" class="heading-link"><i class="fas fa-link"></i></a><a href="#设置版本号" class="headerlink" title="设置版本号"></a>设置版本号</h2>
+      <figure class="highlight gradle"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">defaultConfig &#123;</span><br><span class="line">    applicationId <span class="string">&quot;com.example.moshuying&quot;</span></span><br><span class="line">    minSdkVersion <span class="number">16</span></span><br><span class="line">    targetSdkVersion <span class="number">30</span></span><br><span class="line"><span class="comment">//  在这里修改版本号 versionCode 用来比较版本是否升级，后者用来给用户看的</span></span><br><span class="line">    versionCode <span class="number">1</span></span><br><span class="line">    versionName <span class="string">&quot;1.1.8&quot;</span></span><br><span class="line"></span><br><span class="line">    testInstrumentationRunner <span class="string">&quot;androidx.test.runner.AndroidJUnitRunner&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+
+        <h1 id="第二章-核心组件-活动"   >
+          <a href="#第二章-核心组件-活动" class="heading-link"><i class="fas fa-link"></i></a><a href="#第二章-核心组件-活动" class="headerlink" title="第二章 核心组件-活动"></a>第二章 核心组件-活动</h1>
+      
+        <h2 id="活动是什么"   >
+          <a href="#活动是什么" class="heading-link"><i class="fas fa-link"></i></a><a href="#活动是什么" class="headerlink" title="活动是什么"></a>活动是什么</h2>
+      <p>在android中运行任何应用都会看到不同的界面，这些界面及在界面中完成的各种操作，都通过活动完成</p>
+<p>活动具有一下特点</p>
+<ul>
+<li>可以通过返回键退出活动</li>
+<li>可通过home建返回桌面</li>
+<li>可在活动中启动另一个界面，此时按返回键可返回前一个活动</li>
+</ul>
+<p>一个应用通常包含多个活动，活动之间相对独立，包含多个活动的应用，需要为其指定一个“主”活动，即启动应用时首先打开的活动。</p>
+<p>Android 允许启动其他应用中的活动</p>
+
+        <h2 id="活动的基本操作"   >
+          <a href="#活动的基本操作" class="heading-link"><i class="fas fa-link"></i></a><a href="#活动的基本操作" class="headerlink" title="活动的基本操作"></a>活动的基本操作</h2>
+      <p>为活动绑定自定义视图</p>
+<p>通常在活动的<code>onCreate()</code>方法中使用<code>setContentView()</code>方法来为活动绑定一个视图</p>
+
+        <h2 id="启动另一个活动"   >
+          <a href="#启动另一个活动" class="heading-link"><i class="fas fa-link"></i></a><a href="#启动另一个活动" class="headerlink" title="启动另一个活动"></a>启动另一个活动</h2>
+      <p>启动活动使用的是<code>startActivity()</code>方法</p>
+<figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">        Button btnStartAnother = (Button)findViewById(R.id.btnStartAnother);<span class="comment">// 引用布局中的按钮</span></span><br><span class="line">        btnStartAnother.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">                startActivity(<span class="keyword">new</span> Intent(MainActivity.<span class="keyword">this</span>, BtnStartAnother.class));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+<p>结束活动则调用<code>finish()</code>,为按钮绑定事件监听器后点击按钮调用<code>finish()</code>即可实现点击按钮退出活动</p>
+<figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BtnStartAnother</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.btn_start_activity);</span><br><span class="line">        findViewById(R.id.destory).setOnClickListener(<span class="keyword">new</span> View.OnClickListener()&#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span></span>&#123;</span><br><span class="line">                finish();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+
+
+        <h2 id="在活动中使用Intent"   >
+          <a href="#在活动中使用Intent" class="heading-link"><i class="fas fa-link"></i></a><a href="#在活动中使用Intent" class="headerlink" title="在活动中使用Intent"></a>在活动中使用Intent</h2>
+      
+        <h3 id="显示Intent"   >
+          <a href="#显示Intent" class="heading-link"><i class="fas fa-link"></i></a><a href="#显示Intent" class="headerlink" title="显示Intent"></a>显示Intent</h3>
+      <p>直接忽略1-6步，手动创建java class后给class继承<code>Activity</code>后会自动引入相关包，后面步骤同理</p>
+
+        <h3 id="隐式Intent"   >
+          <a href="#隐式Intent" class="heading-link"><i class="fas fa-link"></i></a><a href="#隐式Intent" class="headerlink" title="隐式Intent"></a>隐式Intent</h3>
+      <p>这一步不要被<code>android.support.v7.app.AppCompatActivity</code>吸引了注意力，后面的代码其实还是继承<code>AppCompatActivity</code>,参照上面手动输入即可，android studio会自动引入，我这边自动引入为<code>androidx.appcompat.app.AppCompatActivity</code>，如果过程中遇到问题，可以编辑<code>build.gradle</code>**注意这个文件有两个，选(Module:app)**在<code>dependencies</code>中加入一行<code>compile &#39;com.android.support:appcompat-v7:26.+&#39;</code>然后android studio会报错，照着报错修复即可，这一步可能会操作到<code>Migrate to AndroidX</code>，android studio也会自动为你备份，不必担心。</p>
+<p><strong>这一步我在代码中做了各种分享功能</strong>，<a href="/2020/10/03/android-document-sharing/">相关解析在这里</a>，<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/moshuying/androidDev/commit/8a91a9476387dcbc216f86e6ed553fecaa29f89c" >源代码参考链接</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+
+        <h3 id="使用预定义操作"   >
+          <a href="#使用预定义操作" class="heading-link"><i class="fas fa-link"></i></a><a href="#使用预定义操作" class="headerlink" title="使用预定义操作"></a>使用预定义操作</h3>
+      <p>这里使用隐式Intent打开联系人信息的地方可能不太一样了，参考官网给出的<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://developer.android.google.cn/training/contacts-provider/modify-data#java" >样例</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p>我的代码实现也是参考官网给出的样例,实现也很简单，这里代码去掉了注释，<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/moshuying/androidDev/blob/8a91a9476387dcbc216f86e6ed553fecaa29f89c/app/src/main/java/com/example/moshuying/PredefinedOperation.java#L28" >完整源代码在这里</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">findViewById(R.id.editContacts).setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">    EditText emailAddress = (EditText) findViewById(R.id.email);</span><br><span class="line">    EditText phoneNumber = (EditText) findViewById(R.id.phone);</span><br><span class="line">    EditText name = (EditText) findViewById(R.id.name);</span><br><span class="line">    Intent intent = <span class="keyword">new</span> Intent(ContactsContract.Intents.Insert.ACTION);</span><br><span class="line">    intent.setType(ContactsContract.RawContacts.CONTENT_TYPE);</span><br><span class="line">    intent.putExtra(ContactsContract.Intents.Insert.EMAIL, emailAddress.getText())</span><br><span class="line">      .putExtra(ContactsContract.Intents.Insert.EMAIL_TYPE,ContactsContract.CommonDataKinds.Email.TYPE_WORK)</span><br><span class="line">      .putExtra(ContactsContract.Intents.Insert.PHONE, phoneNumber.getText())</span><br><span class="line">      .putExtra(ContactsContract.Intents.Insert.PHONE_TYPE,ContactsContract.CommonDataKinds.Phone.TYPE_WORK)</span><br><span class="line">      .putExtra(ContactsContract.Intents.Insert.PHONETIC_NAME,name.getText());</span><br><span class="line"><span class="comment">//     intent.setData(Uri.parse(&quot;content://contacts/people/1&quot;));</span></span><br><span class="line">    startActivity(intent);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></div></figure>
+
+        <h2 id="在活动之间传递数据"   >
+          <a href="#在活动之间传递数据" class="heading-link"><i class="fas fa-link"></i></a><a href="#在活动之间传递数据" class="headerlink" title="在活动之间传递数据"></a>在活动之间传递数据</h2>
+      <p>这一章节本身简单学习了活动的传递方式，重点了解如何在活动中传递数据。</p>
+<p>书上的示例比较简单，new完intent后使用putExtra类似key,value的方式存进去就行。</p>
+<figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 传递简单的数据</span></span><br><span class="line">Intent intent = <span class="keyword">new</span> Intent(JsonEdit.<span class="keyword">this</span>,Auto.class);</span><br><span class="line">Bundle bd = <span class="keyword">new</span> Bundle();</span><br><span class="line">TextView stringKey = findViewById(R.id.bundleKeyString);</span><br><span class="line">String string = stringKey.getText().toString();</span><br><span class="line">bd.putString(<span class="string">&quot;String&quot;</span>,string);</span><br><span class="line">TextView stringArray = findViewById(R.id.stringArray);</span><br><span class="line">bd.putStringArray(<span class="string">&quot;StringArray&quot;</span>,stringArray.getText().toString().split(<span class="string">&quot;,&quot;</span>));</span><br><span class="line">startActivity(intent);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 传递json</span></span><br><span class="line"><span class="keyword">final</span> TextView editText = (TextView) findViewById(R.id.editTextTextMultiLine);</span><br><span class="line">editText.setText(<span class="string">&quot;&#123;\\&quot;</span>name\\<span class="string">&quot;:\\&quot;</span>moshuying\\<span class="string">&quot;,\\&quot;</span>url\\<span class="string">&quot;:\\&quot;</span>moshuying.top\\<span class="string">&quot;,\\&quot;</span>email\\<span class="string">&quot;:\\&quot;</span><span class="number">1460083332</span><span class="meta">@qq</span>\\<span class="string">&quot;,\\&quot;</span>github\\<span class="string">&quot;:\\&quot;</span>moshuying.top\\<span class="string">&quot;&#125;&quot;</span>);</span><br><span class="line"><span class="comment">// 这里踩了个小坑，从editText.getText()后还需要toString()才能正确获取</span></span><br><span class="line">Intent intent  = <span class="keyword">new</span> Intent(JsonEdit.<span class="keyword">this</span>,Auto.class);</span><br><span class="line">intent.putExtra(<span class="string">&quot;data&quot;</span>,editText.getText().toString());</span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></div></figure>
+
+<p>当然在activity中传递数据的方法不止intent的，只是intent比较常用。</p>
+<p>Activity之间传递数据的几种方式,参考自这篇<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://blog.csdn.net/ahuier/article/details/8953017" >文章</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>,文章比较老了，方法竟然还是这些，甚至阿里巴巴的一些应用也是这样的。</p>
+<ul>
+<li>使用Intent</li>
+<li>使用剪切板</li>
+<li>使用静态变量</li>
+</ul>
+<p>Intent可以传递哪些类型的数据，<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.nowcoder.com/questionTerminal/c934814c65b049a6992bcbb246711022?from=14pdf" >来源</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<ol>
+<li>8种基本数据类型及其数组</li>
+<li>String（String实现了 Serializable ）/CharSequence实例类型的数据及其数组</li>
+<li>实现了Parcelable的对象及其数组</li>
+<li>实现了 Serializable 的对象及其数组</li>
+</ol>
+<p>看到这里的时候我想到能在activity中获取数据，就能用这些数据动态创建页面，所以顺便看了下动态创建元素的办法。</p>
+<p>实际上非常简单,先声明一个LinearLayout</p>
+<figure class="highlight xml"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">LinearLayout</span></span></span><br><span class="line"><span class="tag">  <span class="attr">android:id</span>=<span class="string">&quot;@+id/auto_list_item&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">android:orientation</span>=<span class="string">&quot;vertical&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">tools:ignore</span>=<span class="string">&quot;MissingConstraints&quot;</span>/&gt;</span></span><br></pre></td></tr></table></div></figure>
+
+<p>随后在对应的代码里获取到这个元素，再用<code>addView()</code>即可动态添加</p>
+<figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">LinearLayout layout = findViewById(R.id.auto_list_item);</span><br><span class="line">layout.setOrientation(LinearLayout.VERTICAL);</span><br></pre></td></tr></table></div></figure>
+
+<p>想到动态添加元素就觉得可以根据后台请求的数据来生成各种界面，于是就又去了解了一下Android的网络请求方法<a href="/2020/10/09/android-document-sharing/">相关解析</a>，<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/moshuying/androidDev/blob/b11d9aa6e8ad6390583fb1b3571283e432d9803f/app/src/main/java/com/example/moshuying/network/ProductEntry.java#L107" >关键代码</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p>既然都动态元素添加了，肯定会遇到添加的元素超过容器大小（超出屏幕）的情况，这时在对应的布局文件外面放一层<code>ScrollView</code>即可解决问题。</p>
+<figure class="highlight xml"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ScrollView</span></span></span><br><span class="line"><span class="tag">  <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">android:scrollbars</span>=<span class="string">&quot;vertical&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">android:fadingEdge</span>=<span class="string">&quot;vertical&quot;</span></span></span><br><span class="line"><span class="tag">  &gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">LinearLayout</span></span></span><br><span class="line"><span class="tag">      <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">      <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">      <span class="attr">android:orientation</span>=<span class="string">&quot;vertical&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ScrollView</span>&gt;</span></span><br></pre></td></tr></table></div></figure>
+
+
+        <h3 id="获取活动返回的数据"   >
+          <a href="#获取活动返回的数据" class="heading-link"><i class="fas fa-link"></i></a><a href="#获取活动返回的数据" class="headerlink" title="获取活动返回的数据"></a>获取活动返回的数据</h3>
+      <p>这一小节有一小部分不太一样的地方，启动活动变成了<code>startActivityforResult</code>,活动返回时也要用<code>setResult</code>设置返回结果。</p>
+<figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// mainActivity 启动活动时传入的 `REQUEST_CODE` 值随意设置一个数字不要冲突就行</span></span><br><span class="line">findViewById(R.id.getActivityBackData).setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">            Intent intent = <span class="keyword">new</span> Intent(JsonEdit.<span class="keyword">this</span>,Auto.class);</span><br><span class="line">            intent.putExtra(<span class="string">&quot;type&quot;</span>,<span class="string">&quot;callback&quot;</span>);</span><br><span class="line">            intent.putExtra(<span class="string">&quot;request_code&quot;</span>,REQUEST_CODE);</span><br><span class="line">            startActivityForResult(intent,REQUEST_CODE);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"><span class="comment">// mainActivity设置响应返回值</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onActivityResult</span><span class="params">(<span class="keyword">int</span> requestCode,<span class="keyword">int</span> resultCode,Intent data)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onActivityResult(requestCode, resultCode, data);</span><br><span class="line">    printState();</span><br><span class="line">    <span class="keyword">if</span>(requestCode == REQUEST_CODE)&#123; <span class="comment">// 返回的请求码与当前活动请求码一致时，才执行后继操作</span></span><br><span class="line">        <span class="keyword">if</span>(resultCode == RESULT_OK)&#123; <span class="comment">// RESULT_OK表示返回的活动已成功处理请求</span></span><br><span class="line">            TextView textView = findViewById(R.id.showActivityBackData);</span><br><span class="line">            textView.setText(<span class="string">&quot;从另一个Activity获取到返回值：&quot;</span>+data.getStringExtra(<span class="string">&quot;data&quot;</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 启动的活动中注意要  `setResult`</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">setCallback</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">final</span> EditText editText = <span class="keyword">new</span> EditText(<span class="keyword">this</span>);</span><br><span class="line">    editText.setText(<span class="string">&quot;这里填入活动返回的值&quot;</span>);</span><br><span class="line">    linearLayout.addView(editText);</span><br><span class="line"></span><br><span class="line">    Button button = <span class="keyword">new</span> Button(<span class="keyword">this</span>);</span><br><span class="line">    button.setText(<span class="string">&quot;输入完成&quot;</span>);</span><br><span class="line">    button.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">            Intent resintent = <span class="keyword">new</span> Intent();</span><br><span class="line">            resintent.putExtra(<span class="string">&quot;data&quot;</span>,editText.getText().toString());</span><br><span class="line">            setResult(RESULT_OK,resintent);</span><br><span class="line">            finish();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    linearLayout.addView(button);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></div></figure>
+<p><a href="">完整代码</a></p>
+
+        <h2 id="活动的生命周期"   >
+          <a href="#活动的生命周期" class="heading-link"><i class="fas fa-link"></i></a><a href="#活动的生命周期" class="headerlink" title="活动的生命周期"></a>活动的生命周期</h2>
+      <p><img src="/uploads/Android_Activity_Lifecycle.png" alt="这张图可能要时不时的看"></p>
+<p>这一章节有个检测活动生命周期的例子，这里我写了个直接获取的函数。</p>
+<p>放到类里即可，记得把包名和类名换成你自己的即可</p>
+<figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String packageName = <span class="string">&quot;com.example.moshuying&quot;</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String className = <span class="string">&quot;JsonEdit&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printState</span><span class="params">()</span></span>&#123;</span><br><span class="line">    StackTraceElement[] stes = Thread.currentThread().getStackTrace();</span><br><span class="line">    <span class="keyword">for</span> (StackTraceElement ste : stes) &#123;</span><br><span class="line">        <span class="keyword">if</span> ((ste.getClassName().equals(packageName+<span class="string">&quot;.&quot;</span>+className)) &amp;&amp; (!ste.getMethodName().equals(<span class="string">&quot;printState&quot;</span>))) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;正在执行&quot;</span> + ste.getClassName().replace(packageName+<span class="string">&quot;.&quot;</span>,<span class="string">&quot;&quot;</span>) + <span class="string">&quot;.&quot;</span> + ste.getMethodName()+<span class="string">&quot;()&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+<p>随后在生命周期对应的地方（其实其他类中的函数都可以）调用一下即可</p>
+<figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onDestroy();</span><br><span class="line">    printState();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+<p>最后的效果如图</p>
+<p><img src="/uploads/Snipaste_2020-10-09_21-09-41.png"></p>
+
+        <h2 id="代码设置界面元素"   >
+          <a href="#代码设置界面元素" class="heading-link"><i class="fas fa-link"></i></a><a href="#代码设置界面元素" class="headerlink" title="代码设置界面元素"></a>代码设置界面元素</h2>
+      <p>比较喜欢用代码生成界面，免去一堆xml难以寻找自己定义的一些东西，同时debug起来也比较麻烦，这里总结一些代码操作ui元素的代码片段</p>
+<figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> MaterialTextView textView = <span class="keyword">new</span> MaterialTextView(<span class="keyword">this</span>);<span class="comment">// 声明UI元素 （TextView button）</span></span><br><span class="line">RelativeLayout.LayoutParams layoutParams2 = <span class="keyword">new</span> RelativeLayout.LayoutParams(MATCH_PARENT,WRAP_CONTENT); <span class="comment">// 声明布局参数</span></span><br><span class="line">layoutParams2.topMargin = <span class="number">5</span>; <span class="comment">// 边距  [top|bottom|left|right]Margin  </span></span><br><span class="line"><span class="comment">// 也可以一次性设置多个 RLayoutParams.setMargins(10,170,10,0); </span></span><br><span class="line">layoutParams2.addRule(RelativeLayout.BELOW,password.getId());<span class="comment">// 在某个元素下面</span></span><br><span class="line">textView.setGravity(Gravity.CENTER_VERTICAL);</span><br><span class="line">textView.setLayoutParams(layoutParams2);</span><br><span class="line">textView.setId(View.generateViewId());<span class="comment">// 不直接设置id 生成id 通过getid方法获取id</span></span><br><span class="line">textView.setTextColor(Color.parseColor(<span class="string">&quot;#FF0000&quot;</span>));<span class="comment">//直接书写颜色需要解析一下</span></span><br><span class="line"><span class="comment">// button.setBackgroundColor(getResources().getColor(R.color.back));  // 从xml中获取指定id的颜色值</span></span><br><span class="line"><span class="comment">// RelativeLayout.LayoutParams RlayoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);</span></span><br><span class="line"><span class="comment">// RlayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP); // 添加父级约束</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// EditText editText2 = new EditText(this);</span></span><br><span class="line"><span class="comment">// editText2.setText(&quot;输入密码&quot;);</span></span><br><span class="line"><span class="comment">// editText2.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD); //设置edittext 输入类型</span></span><br><span class="line"></span><br><span class="line">relativeLayout.addView(textView);</span><br></pre></td></tr></table></div></figure>
+
+
+        <h2 id="给某个活动设置主题"   >
+          <a href="#给某个活动设置主题" class="heading-link"><i class="fas fa-link"></i></a><a href="#给某个活动设置主题" class="headerlink" title="给某个活动设置主题"></a>给某个活动设置主题</h2>
+      <figure class="highlight xml"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">&quot;.StartupMode&quot;</span> <span class="attr">android:theme</span>=<span class="string">&quot;@style/Theme.MaterialComponents&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">&quot;.StartupMode&quot;</span> <span class="attr">android:theme</span>=<span class="string">&quot;@style/Theme.MaterialComponents.Light&quot;</span>/&gt;</span> </span><br></pre></td></tr></table></div></figure>
+
+
+        <h2 id="创建弹出式对话框"   >
+          <a href="#创建弹出式对话框" class="heading-link"><i class="fas fa-link"></i></a><a href="#创建弹出式对话框" class="headerlink" title="创建弹出式对话框"></a>创建弹出式对话框</h2>
+      <figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">createDialog</span><span class="params">()</span></span>&#123;</span><br><span class="line">    MaterialAlertDialogBuilder builder = <span class="keyword">new</span> MaterialAlertDialogBuilder(<span class="keyword">this</span>);</span><br><span class="line">    builder.setTitle(<span class="string">&quot;布局设置&quot;</span>);</span><br><span class="line">    builder.setIcon(R.drawable.ic_learning_material);</span><br><span class="line"></span><br><span class="line">    LinearLayout layout = <span class="keyword">new</span> LinearLayout(<span class="keyword">this</span>);</span><br><span class="line">    layout.setOrientation(LinearLayout.VERTICAL);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">final</span> EditText editText = <span class="keyword">new</span> EditText(<span class="keyword">this</span>);builder.setView(editText);</span><br><span class="line">    MaterialTextView textView = <span class="keyword">new</span> MaterialTextView(<span class="keyword">this</span>);</span><br><span class="line">    textView.setText(<span class="string">&quot;请在下面输入1、2或其他数据&quot;</span>);</span><br><span class="line"></span><br><span class="line">    layout.addView(textView);</span><br><span class="line">    layout.addView(editText);</span><br><span class="line"></span><br><span class="line">    builder.setView(layout);</span><br><span class="line">    builder.setPositiveButton(<span class="string">&quot;确认&quot;</span>, <span class="keyword">new</span> DialogInterface.OnClickListener() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(DialogInterface dialog, <span class="keyword">int</span> which)</span> </span>&#123;</span><br><span class="line">            changeLayout(editText.getText().toString());</span><br><span class="line"><span class="comment">//                finish(); // 这里无需finish()点击取消什么的会自己关闭掉自己 finish()会退掉整个activity</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    builder.setNegativeButton(<span class="string">&quot;取消&quot;</span>, <span class="keyword">new</span> DialogInterface.OnClickListener() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(DialogInterface dialog, <span class="keyword">int</span> which)</span> </span>&#123;</span><br><span class="line"><span class="comment">//                finish();</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    builder.setCancelable(<span class="keyword">true</span>);</span><br><span class="line">    AlertDialog dialog = builder.create();</span><br><span class="line">    dialog.setCanceledOnTouchOutside(<span class="keyword">true</span>);</span><br><span class="line">    dialog.show();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+
+        <h1 id="问题"   >
+          <a href="#问题" class="heading-link"><i class="fas fa-link"></i></a><a href="#问题" class="headerlink" title="问题"></a>问题</h1>
+      
+        <h2 id="Android-Studio-–“Cannot-resolve-symbol”"   >
+          <a href="#Android-Studio-–“Cannot-resolve-symbol”" class="heading-link"><i class="fas fa-link"></i></a><a href="#Android-Studio-–“Cannot-resolve-symbol”" class="headerlink" title="Android Studio –“Cannot resolve symbol”"></a>Android Studio –“Cannot resolve symbol”</h2>
+      <p>Android Studio 无法识别同一个 package 里的其他类，将其显示为红色，但是 compile 没有问题。鼠标放上去后显示 “Cannot resolve symbol XXX”，重启 Android Studio，重新 sync gradle，Clean build 都没有用。</p>
+<p>多半是因为 Android Studio 之前发生了错误，某些 setting 出了问题。解决方法如下：</p>
+<p>点击菜单中的 “File” -&gt; “Invalidate Caches / Restart”，然后点击对话框中的 “Invalidate and Restart”，清空 cache 并且重启。语法就会正确的高亮了。</p>
+
+        <h2 id="open-failed-EACCES-Permission-denied"   >
+          <a href="#open-failed-EACCES-Permission-denied" class="heading-link"><i class="fas fa-link"></i></a><a href="#open-failed-EACCES-Permission-denied" class="headerlink" title="open failed: EACCES (Permission denied)"></a>open failed: EACCES (Permission denied)</h2>
+      <p>在AndroidManifest.xml中声明了<code>&lt;uses-permission android:name=&quot;android.permission.READ_EXTERNAL_STORAGE&quot; /&gt;</code>，却还是报错<code>open failed: EACCES (Permission denied)</code>。</p>
+<p>问题的原因在于比如在安卓Q(10)开始，就采用存储的分区控制。</p>
+<p>解决方法：只能通过手动打开权限，才能使用存储权限。<br>在AndroidManifest.xml的application标签下新增<code>android:requestLegacyExternalStorage=&quot;true&quot;</code>即可解决</p>
+
+        <h1 id="参考文章"   >
+          <a href="#参考文章" class="heading-link"><i class="fas fa-link"></i></a><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1>
+      <p>  <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://maven.google.com/web/index.html#com.google.android.material:material" >maven google 官方库</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span><br>  <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://developer.android.google.cn/reference/com/google/android/material/packages" >material 文档</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span><br>  <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35775053/article/details/108531983" >Android Material Design全面解析（一）- MaterialButton篇</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span><br>  <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.cnblogs.com/lijunamneg/archive/2013/04/18/3029356.html" >设置TextView文字居中,代码实现android:layout_gravity</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span><br>  <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://htmlcolorcodes.com/zh/yanse-ming/" >HTML 颜色名</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span><br>  <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://blog.csdn.net/u014649598/article/details/45580461" >Android 动态设置margin</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span><br>  <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://blog.csdn.net/chenxu6/article/details/41523943" >Android color(颜色) 在XML文件和java代码中</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span><br>  <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://juejin.im/post/6844903807046909966" >Android 显示、隐藏状态栏和导航栏</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span><br>  <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://blog.csdn.net/wumingxiaoqiang/article/details/52585530" >Android修改APP版本号</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span><br>  <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://blog.csdn.net/u013059863/article/details/49914513" >Android之设置EditText输入类型(setInputType()方法和android:inputType属性)</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span><br>  <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://blog.csdn.net/chaoyu168/article/details/51538996" >Android Studio –“Cannot resolve symbol” 解决办法</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span><br>  <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.jianshu.com/p/e1f043a263a6" >Android10读写文件权限请求bug——open failed: EACCES (Permission denied)</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://msy.plus">墨抒颖</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://msy.plus/2020/10/03/reading-book-android/">https://msy.plus/2020/10/03/reading-book-android/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://msy.plus/tags/android/">android</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://msy.plus/tags/%E8%AF%BB%E4%B9%A6/">读书</a></span></div><div class="post-share"><div class="social-share" data-sites="qzone, qq, weibo, wechat, douban, linkedin, facebook, twitter, google">Share to: </div></div><div class="post-reward reward"><div class="reward-button">请我喝杯咖啡~</div><div class="reward-qrcode"><span class="reward-qrcode-alipay"><img class="reward-qrcode-alipay__img" src="/uploads/alipay.jpg"><div class="reward-qrcode-alipay__text">支付宝打赏</div></span><span class="reward-qrcode-wechat"><img class="reward-qrcode-wechat__img" src="/uploads/wechat.png"><div class="reward-qrcode-wechat__text">微信打赏</div></span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2020/10/04/android-document-sharing/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">Android 文件分享</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2020/09/30/uml-quick-start/"><span class="paginator-prev__text">uml快速入门(弹射起步)</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="disqus_thread"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2"><span class="toc-number">1.</span> <span class="toc-text">
+          第一章 环境部署</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#gradle"><span class="toc-number">2.</span> <span class="toc-text">
+          gradle</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E7%94%A8%E5%8C%85"><span class="toc-number">2.1.</span> <span class="toc-text">
+          引用包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E7%89%88%E6%9C%AC%E5%8F%B7"><span class="toc-number">2.2.</span> <span class="toc-text">
+          设置版本号</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6-%E6%B4%BB%E5%8A%A8"><span class="toc-number">3.</span> <span class="toc-text">
+          第二章 核心组件-活动</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B4%BB%E5%8A%A8%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">3.1.</span> <span class="toc-text">
+          活动是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B4%BB%E5%8A%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">3.2.</span> <span class="toc-text">
+          活动的基本操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E5%8F%A6%E4%B8%80%E4%B8%AA%E6%B4%BB%E5%8A%A8"><span class="toc-number">3.3.</span> <span class="toc-text">
+          启动另一个活动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8%E6%B4%BB%E5%8A%A8%E4%B8%AD%E4%BD%BF%E7%94%A8Intent"><span class="toc-number">3.4.</span> <span class="toc-text">
+          在活动中使用Intent</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%98%BE%E7%A4%BAIntent"><span class="toc-number">3.4.1.</span> <span class="toc-text">
+          显示Intent</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9A%90%E5%BC%8FIntent"><span class="toc-number">3.4.2.</span> <span class="toc-text">
+          隐式Intent</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E9%A2%84%E5%AE%9A%E4%B9%89%E6%93%8D%E4%BD%9C"><span class="toc-number">3.4.3.</span> <span class="toc-text">
+          使用预定义操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8%E6%B4%BB%E5%8A%A8%E4%B9%8B%E9%97%B4%E4%BC%A0%E9%80%92%E6%95%B0%E6%8D%AE"><span class="toc-number">3.5.</span> <span class="toc-text">
+          在活动之间传递数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%B4%BB%E5%8A%A8%E8%BF%94%E5%9B%9E%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="toc-number">3.5.1.</span> <span class="toc-text">
+          获取活动返回的数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B4%BB%E5%8A%A8%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-number">3.6.</span> <span class="toc-text">
+          活动的生命周期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2%E5%85%83%E7%B4%A0"><span class="toc-number">3.7.</span> <span class="toc-text">
+          代码设置界面元素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%99%E6%9F%90%E4%B8%AA%E6%B4%BB%E5%8A%A8%E8%AE%BE%E7%BD%AE%E4%B8%BB%E9%A2%98"><span class="toc-number">3.8.</span> <span class="toc-text">
+          给某个活动设置主题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%BC%B9%E5%87%BA%E5%BC%8F%E5%AF%B9%E8%AF%9D%E6%A1%86"><span class="toc-number">3.9.</span> <span class="toc-text">
+          创建弹出式对话框</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-number">4.</span> <span class="toc-text">
+          问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Android-Studio-%E2%80%93%E2%80%9CCannot-resolve-symbol%E2%80%9D"><span class="toc-number">4.1.</span> <span class="toc-text">
+          Android Studio –“Cannot resolve symbol”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#open-failed-EACCES-Permission-denied"><span class="toc-number">4.2.</span> <span class="toc-text">
+          open failed: EACCES (Permission denied)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="toc-number">5.</span> <span class="toc-text">
+          参考文章</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/uploads/pic-512x512.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">你可以在这些地方找到我</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/moshuying/" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="http://sfau.lt/bPbzVVJ/" target="_blank" rel="noopener" data-popover="思否" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">sf</span></a><a class="sidebar-ov-social-item" href="https://home.cnblogs.com/u/moshuying/" target="_blank" rel="noopener" data-popover="social.bokeyuan" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">博客园</span></a><a class="sidebar-ov-social-item" href="https://juejin.im/user/2700056289356936/" target="_blank" rel="noopener" data-popover="social.juejin" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">掘金</span></a><a class="sidebar-ov-social-item" href="http://weibo.cn/ismoshuying" target="_blank" rel="noopener" data-popover="微博" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-weibo"></i></span></a><a class="sidebar-ov-social-item" href="https://www.zhihu.com/people/mo-shu-ying-54" target="_blank" rel="noopener" data-popover="知乎" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">知</span></a><a class="sidebar-ov-social-item" href="https://blog.csdn.net/qq_34846662" target="_blank" rel="noopener" data-popover="social.csdn" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">csdn</span></a></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-email"><a class="sidebar-ov-feed-email__link" href="http://eepurl.com/heNNvH" target="_blank" rel="noopener"><span class="sidebar-ov-feed-email__icon"><i class="fas fa-envelope"></i></span><span>Email 订阅</span></a></span><span class="sidebar-ov-feed-rss"><a class="sidebar-ov-feed-rss__link" href="/atom.xml" target="_blank" rel="noopener"><span class="sidebar-ov-feed-rss__icon"><i class="fas fa-rss"></i></span><span>RSS 订阅</span></a></span></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">30</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">14</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">30</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>墨抒颖</span><span class="footer__devider">|</span><span><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn" >蜀ICP备19031274号-1</a></span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.4.0</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div><div class="busuanzi"><span class="busuanzi-siteuv"><span class="busuanzi-siteuv__icon"><i class="fas fa-user"></i></span><span class="busuanzi-siteuv__info">访问人数</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_uv"></span></span><span class="busuanzi-sitepv"><span class="busuanzi-siteuv__icon"><i class="fas fa-eye"></i></span><span class="busuanzi-siteuv__info">浏览总量</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/ribbon.js@latest/dist/ribbon.min.js" size="300" alpha="0.6" zIndex="-1"></script><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.json';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章无标题 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);
+
+function safeOpenUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+
+function extSearch(engine) {
+  var engines = {
+    google: 'https://www.google.com/search?q=',
+    bing: 'https://cn.bing.com/search?q=',
+    baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+  };
+  var host = window.location.host;
+  var query = $('.search-input input').val().toLowerCase().trim();
+  var uri = engines[engine] + query + ' site:' + host;
+
+  if (query) {
+    safeOpenUrl(uri);
+  } else {
+    Stun.utils.popAlert('warning', '请输入字符');
+  }
+}
+
+var assistSearchList = window.CONFIG.assistSearch;
+
+if (Array.isArray(assistSearchList)) {
+  assistSearchList.forEach(function (name) {
+    document.querySelector('.search-btns-item--' + name).addEventListener('click', function () {
+      extSearch(name);
+    }, false);
+  });
+}</script><script src="https://cdn.jsdelivr.net/npm/pjax@latest/pjax.min.js"></script><script>window.addEventListener('DOMContentLoaded', function () {
+  var pjax = new Pjax({"selectors":["head title","#main",".pjax-reload"],"history":true,"scrollTo":false,"scrollRestoration":false,"cacheBust":false,"debug":false,"currentUrlFullReload":false,"timeout":0});
+  // 加载进度条的计时器
+  var loadingTimer = null;
+
+  // 重置页面 Y 方向上的滚动偏移量
+  document.addEventListener('pjax:send', function () {
+    $('.header-nav-menu').removeClass('show');
+    if (CONFIG.pjax && CONFIG.pjax.avoidBanner) {
+      $('html').velocity('scroll', {
+        duration: 500,
+        offset: $('#header').height(),
+        easing: 'easeInOutCubic'
+      });
+    }
+
+    var loadingBarWidth = 20;
+    var MAX_LOADING_WIDTH = 95;
+
+    $('.loading-bar').addClass('loading');
+    $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    clearInterval(loadingTimer);
+    loadingTimer = setInterval(function () {
+      loadingBarWidth += 3;
+      if (loadingBarWidth > MAX_LOADING_WIDTH) {
+        loadingBarWidth = MAX_LOADING_WIDTH;
+      }
+      $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    }, 500);
+  }, false);
+
+  window.addEventListener('pjax:complete', function () {
+    clearInterval(loadingTimer);
+    $('.loading-bar__progress').css('width', '100%');
+    $('.loading-bar').removeClass('loading');
+    setTimeout(function () {
+      $('.loading-bar__progress').css('width', '0');
+    }, 400);
+    $('link[rel=prefetch], script[data-pjax-rm]').each(function () {
+      $(this).remove();
+    });
+    $('script[data-pjax], #pjax-reload script').each(function () {
+      $(this).parent().append($(this).remove());
+    });
+
+    if (Stun.utils.pjaxReloadBoot) {
+      Stun.utils.pjaxReloadBoot();
+    }
+    if (Stun.utils.pjaxReloadScroll) {
+      Stun.utils.pjaxReloadScroll();
+    }
+    if (Stun.utils.pjaxReloadSidebar) {
+      Stun.utils.pjaxReloadSidebar();
+    }
+    if (false) {
+      if (Stun.utils.pjaxReloadHeader) {
+        Stun.utils.pjaxReloadHeader();
+      }
+      if (Stun.utils.pjaxReloadScrollIcon) {
+        Stun.utils.pjaxReloadScrollIcon();
+      }
+      if (Stun.utils.pjaxReloadLocalSearch) {
+        Stun.utils.pjaxReloadLocalSearch();
+      }
+    }
+  }, false);
+}, false);</script><div id="pjax-reload"><script src="https://cdn.jsdelivr.net/npm/quicklink@1.0.1/dist/quicklink.umd.js"></script><script>function initQuicklink() {
+  quicklink({
+    timeout: '10000',
+    priority: true,
+    ignores: [uri => uri.includes('#'), uri => uri === 'https://msy.plus/2020/10/03/reading-book-android/', /\/api\/?/,uri => uri.includes('.xml'),uri => uri.includes('.zip'),(uri, el) => el.hasAttribute('nofollow'),(uri, el) => el.hasAttribute('noprefetch')]
+  });
+}
+
+if (true || false) {
+  initQuicklink();
+} else {
+  window.addEventListener('DOMContentLoaded', initQuicklink, false);
+}</script><script src="https://cdn.jsdelivr.net/gh/sukkaw/busuanzi@latest/bsz.pure.mini.js" async></script></div><script data-pjax="">function loadDisqus () {
+  if (!document.getElementById('disqus_thread')) {
+    return;
+  }
+  if (window.DISQUS) {
+    DISQUS.reset({
+      reload: true,
+      config: function () {
+        this.page.url = 'https://msy.plus/2020/10/03/reading-book-android/';
+        this.page.identifier = '2020/10/03/reading-book-android/';
+        this.page.title = 'Android 移动应用开发基础教程 微课版';
+      }
+    });
+  } else {
+    var d = document;
+    var sc = d.createElement('script');
+    var se = d.createElement('script');
+
+    if (true) {
+      sc.src = 'https://msy-plus.disqus.com/count.js';
+      sc.id = 'dsq-count-scr';
+      sc.async = true;
+      if (true) {
+        sc.setAttribute('data-pjax', '');
+      }
+      (d.head || d.body).appendChild(sc);
+    }
+    se.src = 'https://msy-plus.disqus.com/embed.js';
+    (d.head || d.body).appendChild(se);
+  }
+}
+
+if (true) {
+  loadDisqus();
+} else {
+  window.addEventListener('DOMContentLoaded', loadDisqus, false);
+}</script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script><script type="application/json" src="/search.json"></script></body></html>
